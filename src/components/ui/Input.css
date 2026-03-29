@@ -1,0 +1,66 @@
+.field {
+  margin-bottom: 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.64rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.32rem;
+  margin-top: 0.7rem;
+}
+
+.field-input {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1.5px solid var(--sand2);
+  background: #fff;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.18s;
+  border-radius: 3px;
+}
+
+.field-input:focus {
+  border-color: var(--g3);
+}
+
+.field-input::placeholder {
+  color: var(--muted);
+}
+
+.field-textarea {
+  resize: vertical;
+  min-height: 68px;
+}
+
+.field-select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%237a9a62' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.9rem center;
+  padding-right: 2.5rem;
+}
+
+/* Dark variant (for dark sections) */
+.field--dark .field-label {
+  color: rgba(200, 216, 176, 0.35);
+}
+
+.field--dark .field-input {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--g6);
+}
+
+.field--dark .field-input:focus {
+  border-color: rgba(143, 173, 110, 0.35);
+}
+
+.field--dark .field-input::placeholder {
+  color: rgba(200, 216, 176, 0.28);
+}

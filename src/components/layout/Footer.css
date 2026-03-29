@@ -1,0 +1,51 @@
+.footer {
+  background: var(--g1);
+  padding: 2.2rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.f-brand {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--g6);
+  letter-spacing: 0.04em;
+}
+
+.f-tag {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: rgba(200, 216, 176, 0.32);
+  text-align: center;
+}
+
+.f-links {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.f-links a {
+  font-size: 0.65rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: rgba(200, 216, 176, 0.35);
+  transition: color 0.2s;
+}
+
+.f-links a:hover {
+  color: var(--g5);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.8rem;
+  }
+}

@@ -1,0 +1,20 @@
+.catering-section { padding: 8rem 0; background: var(--olive-dark); color: var(--cream); position: relative; overflow: hidden; }
+.catering-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+.catering-left h2 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(2rem,3.5vw,2.8rem); color: var(--cream); margin: 1.5rem 0; line-height: 1.15; }
+.catering-left h2 em { font-style: italic; color: var(--olive-pale); }
+.catering-body { font-size: 0.88rem; line-height: 2; color: rgba(245,240,232,0.5); margin-bottom: 2rem; }
+.catering-dishes { list-style: none; display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 2.5rem; }
+.catering-dishes li { font-family: var(--font-serif); font-size: 1.05rem; color: rgba(245,240,232,0.65); display: flex; align-items: center; gap: 0.8rem; }
+.catering-dishes li::before { content: ''; width: 14px; height: 1px; background: var(--olive-light); opacity: 0.4; }
+.catering-form { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); padding: 2.5rem; }
+.catering-form h3 { font-family: var(--font-serif); font-weight: 500; font-size: 1.3rem; color: var(--cream); margin-bottom: 1.5rem; }
+.c-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.c-field { margin-bottom: 1.2rem; }
+.c-label { display: block; font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.35); margin-bottom: 0.4rem; }
+.c-input { width: 100%; padding: 0.7rem 0.9rem; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); color: var(--cream); font-family: var(--font-sans); font-size: 0.86rem; outline: none; transition: border-color 0.25s; }
+.c-input:focus { border-color: rgba(107,127,86,0.5); }
+.c-input::placeholder { color: rgba(245,240,232,0.2); }
+.c-submit { width: 100%; padding: 0.85rem; background: var(--olive); color: var(--cream); border: none; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 500; margin-top: 0.5rem; transition: background 0.25s; cursor: pointer; }
+.c-submit:hover { background: var(--olive-light); }
+@media (max-width: 1024px) { .catering-grid { grid-template-columns: 1fr; } }
+@media (max-width: 768px) { .c-row { grid-template-columns: 1fr; } }

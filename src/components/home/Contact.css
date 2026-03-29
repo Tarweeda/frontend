@@ -1,0 +1,12 @@
+.contact-section { padding: 7rem 0; background: var(--cream); }
+.contact-inner { text-align: center; max-width: 500px; margin: 0 auto; padding: 0 var(--side-pad); }
+.contact-inner h2 { font-family: var(--font-serif); font-weight: 300; font-size: clamp(2rem,3.5vw,2.8rem); color: var(--olive-dark); margin-bottom: 0.5rem; }
+.contact-inner h2 em { font-style: italic; color: var(--olive); }
+.contact-p { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--text3); line-height: 1.7; margin-bottom: 2.5rem; }
+.contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem; }
+.contact-card { background: var(--warm-white); padding: 2rem; text-align: center; border: 1px solid var(--kraft); transition: all 0.25s; display: block; }
+.contact-card:hover { border-color: var(--olive); transform: translateY(-2px); }
+.contact-card-icon { font-size: 1.2rem; margin-bottom: 0.6rem; opacity: 0.6; }
+.contact-card h4 { font-family: var(--font-serif); font-weight: 600; font-size: 1rem; color: var(--olive-dark); margin-bottom: 0.2rem; }
+.contact-card span { font-size: 0.75rem; color: var(--text3); }
+@media (max-width: 768px) { .contact-cards { grid-template-columns: 1fr; } }

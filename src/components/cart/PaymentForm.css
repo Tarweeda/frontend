@@ -1,0 +1,22 @@
+.card-element-wrapper {
+  padding: 0.7rem 0.9rem;
+  border: 1px solid var(--kraft);
+  background: var(--warm-white);
+  margin-bottom: 0.8rem;
+  transition: border-color 0.2s;
+}
+.card-element-wrapper:focus-within {
+  border-color: var(--olive);
+}
+.card-error {
+  color: var(--error, #C0392B);
+  font-size: 0.74rem;
+  min-height: 0.8rem;
+  margin-bottom: 0.5rem;
+}
+.pay-secure {
+  text-align: center;
+  font-size: 0.64rem;
+  color: var(--text3);
+  margin-top: 0.6rem;
+}
