@@ -1,5 +1,4 @@
 import { useState, useMemo } from 'react';
-import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { useProducts } from '../../hooks/useProducts';
 import { ProductCard } from './ProductCard';
