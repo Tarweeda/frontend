@@ -1,22 +1,26 @@
 .card-element-wrapper {
-  padding: 0.7rem 0.9rem;
-  border: 1px solid var(--kraft);
-  background: var(--warm-white);
-  margin-bottom: 0.8rem;
+  padding: 0.7rem 0.75rem;
+  border: 1.5px solid var(--sand2);
+  background: #fff;
+  margin-bottom: 0.75rem;
   transition: border-color 0.2s;
+  border-radius: 3px;
 }
+
 .card-element-wrapper:focus-within {
-  border-color: var(--olive);
+  border-color: var(--g3);
 }
+
 .card-error {
-  color: var(--error, #C0392B);
+  color: var(--error);
   font-size: 0.74rem;
   min-height: 0.8rem;
   margin-bottom: 0.5rem;
 }
+
 .pay-secure {
   text-align: center;
-  font-size: 0.64rem;
-  color: var(--text3);
-  margin-top: 0.6rem;
+  font-size: 0.63rem;
+  color: var(--muted);
+  margin-top: 0.5rem;
 }

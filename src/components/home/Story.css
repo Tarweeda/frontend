@@ -1,9 +1,9 @@
-.story { padding: 8rem 0; background: var(--cream); }
-.story-grid { display: grid; grid-template-columns: 0.9fr 1fr; gap: 5rem; align-items: center; }
-.story-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--kraft); }
-.story-text .label { margin-bottom: 1.5rem; }
-.story-text h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2rem, 3.5vw, 2.8rem); line-height: 1.15; color: var(--olive-dark); margin-bottom: 2rem; }
-.story-text h2 em { font-style: italic; color: var(--olive); }
-.story-body { font-size: 0.9rem; line-height: 2; color: var(--text2); margin-bottom: 1rem; }
-.story-sig { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--kraft); font-family: var(--font-serif); font-style: italic; font-size: 0.95rem; color: var(--olive-light); }
+.story { padding: 8rem 0; background: var(--g1); }
+.story-grid { display: grid; grid-template-columns: 1fr 1.5fr; gap: 6rem; align-items: center; }
+.story-img { width: 100%; aspect-ratio: 3/4; object-fit: cover; background: var(--g3); }
+.story-text .label { margin-bottom: 1.5rem; color: var(--g5); }
+.story-text h2 { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.8rem, 2.8vw, 2.5rem); line-height: 1.18; color: var(--g6); margin-bottom: 2rem; position: relative; }
+.story-text h2 em { font-style: italic; color: var(--g5); }
+.story-body { font-family: var(--font-serif); font-size: 1.1rem; line-height: 1.95; color: rgba(200,216,176,0.65); margin-bottom: 1rem; }
+.story-sig { margin-top: 1.8rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,0.07); font-family: var(--font-serif); font-style: italic; font-size: 0.92rem; color: rgba(143,173,110,0.55); }
 @media (max-width: 768px) { .story-grid { grid-template-columns: 1fr; gap: 2.5rem; } }

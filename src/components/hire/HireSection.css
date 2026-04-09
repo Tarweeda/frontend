@@ -1,21 +1,24 @@
-.hire-section { padding: 7rem 0; background: var(--warm-white); }
-.hire-head { margin-bottom: 3.5rem; }
-.hire-head h2 { font-family: var(--font-serif); font-weight: 400; font-size: clamp(2rem,3.5vw,2.8rem); color: var(--olive-dark); margin: 0.8rem 0 0.5rem; }
-.hire-head p { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--text3); max-width: 480px; line-height: 1.7; }
-.hire-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--kraft); }
-.hire-card { background: var(--warm-white); padding: 2.5rem; transition: background 0.3s; }
-.hire-card:hover { background: var(--cream); }
-.hire-card.featured { background: var(--olive-dark); grid-column: span 2; }
-.hire-card.featured .hire-role { color: var(--cream); }
-.hire-card.featured .hire-desc { color: rgba(245,240,232,0.55); }
-.hire-card.featured .hire-rate { color: var(--olive-pale); }
-.hire-num { font-family: var(--font-serif); font-size: 3rem; font-weight: 300; color: var(--kraft); line-height: 1; margin-bottom: 0.5rem; }
-.hire-card.featured .hire-num { color: rgba(245,240,232,0.1); }
-.hire-role { font-family: var(--font-serif); font-weight: 600; font-size: 1.2rem; color: var(--olive-dark); margin-bottom: 0.5rem; }
-.hire-desc { font-size: 0.82rem; line-height: 1.75; color: var(--text3); margin-bottom: 0.8rem; }
-.hire-rate { font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--olive-light); font-weight: 500; }
-.hire-cta-bar { margin-top: 3rem; background: var(--olive); padding: 2.5rem 3rem; display: flex; justify-content: space-between; align-items: center; gap: 2rem; flex-wrap: wrap; }
-.hire-cta-bar h3 { font-family: var(--font-serif); font-weight: 400; font-size: 1.4rem; color: var(--cream); }
-.hire-cta-bar p { font-family: var(--font-serif); font-style: italic; font-size: 0.92rem; color: rgba(245,240,232,0.5); margin-top: 0.3rem; }
+.hire-section { padding: 7rem 0; background: var(--g7); }
+.hire-head { margin-bottom: 3rem; }
+.hire-head h2 { font-family: var(--font-display); font-weight: 900; font-size: clamp(2rem,3.5vw,2.8rem); color: var(--ink2); margin: 0.8rem 0 0.5rem; }
+.hire-head p { font-family: var(--font-serif); font-style: italic; font-size: 1.05rem; color: var(--muted); max-width: 480px; line-height: 1.7; }
+.hire-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5px; background: var(--sand2); }
+.hire-card { background: #fff; padding: 2.2rem 2rem; display: flex; flex-direction: column; gap: 0.9rem; position: relative; overflow: hidden; transition: background 0.22s; }
+.hire-card:hover { background: var(--g7); }
+.hire-card::after { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--g3); transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s; }
+.hire-card:hover::after { transform: scaleY(1); }
+.hire-card.featured { background: var(--g1); grid-column: span 2; }
+.hire-card.featured::after { background: var(--g5); }
+.hire-card.featured .hire-role { color: var(--g6); }
+.hire-card.featured .hire-desc { color: rgba(200,216,176,0.58); }
+.hire-card.featured .hire-rate { color: var(--g5); }
+.hire-num { font-family: var(--font-display); font-size: 3rem; font-weight: 900; color: var(--sand2); line-height: 1; opacity: 0.4; }
+.hire-card.featured .hire-num { color: rgba(200,216,176,0.12); opacity: 1; }
+.hire-role { font-family: var(--font-display); font-size: 1.18rem; font-weight: 700; color: var(--ink2); }
+.hire-desc { font-size: 0.82rem; line-height: 1.72; color: var(--muted); flex: 1; }
+.hire-rate { font-size: 0.7rem; letter-spacing: 0.13em; text-transform: uppercase; color: var(--g3); font-weight: 600; }
+.hire-cta-bar { margin-top: 3.5rem; background: var(--g1); padding: 2.8rem; display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; }
+.hire-cta-bar h3 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 700; color: var(--g6); margin-bottom: 0.4rem; }
+.hire-cta-bar p { font-family: var(--font-serif); font-style: italic; font-size: 0.97rem; color: rgba(200,216,176,0.48); line-height: 1.6; }
 @media (max-width: 1024px) { .hire-grid { grid-template-columns: 1fr; } .hire-card.featured { grid-column: span 1; } }
-@media (max-width: 768px) { .hire-cta-bar { flex-direction: column; text-align: center; } }
+@media (max-width: 768px) { .hire-cta-bar { grid-template-columns: 1fr; text-align: center; } }

@@ -25,7 +25,7 @@ export function CateringSection() {
       <Container>
         <div className="catering-grid">
           <Reveal className="catering-left">
-            <span className="label" style={{ color: 'var(--olive-pale)', opacity: 0.6 }}>Catering & Gatherings</span>
+            <span className="label" style={{ color: 'var(--g5)', opacity: 0.8 }}>Catering & Gatherings</span>
             <h2>Tell us about<br />your <em>gathering</em></h2>
             <p className="catering-body">Full catering for gatherings of 10 to 200+. We bring the feast to you — communal, generous, and deeply Palestinian.</p>
             <ul className="catering-dishes">{DISHES.map((d) => <li key={d}>{d}</li>)}</ul>
@@ -36,8 +36,8 @@ export function CateringSection() {
             {sent ? (
               <div style={{ textAlign: 'center', padding: '2rem 0' }}>
                 <div style={{ fontSize: '2rem', marginBottom: '1rem', opacity: 0.5 }}>✦</div>
-                <h3 style={{ fontFamily: 'var(--font-serif)', fontSize: '1.3rem', color: 'var(--cream)', marginBottom: '0.5rem' }}>Enquiry Sent</h3>
-                <p style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'rgba(245,240,232,0.5)', fontSize: '0.95rem' }}>We'll get back to you within 24 hours.</p>
+                <h3 style={{ fontFamily: 'var(--font-display)', fontSize: '1.3rem', color: 'var(--g6)', marginBottom: '0.5rem' }}>Enquiry Sent</h3>
+                <p style={{ fontFamily: 'var(--font-serif)', fontStyle: 'italic', color: 'rgba(200,216,176,0.5)', fontSize: '0.95rem' }}>We'll get back to you within 24 hours.</p>
               </div>
             ) : (
               <>

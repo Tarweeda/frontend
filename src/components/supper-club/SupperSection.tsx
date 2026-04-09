@@ -16,7 +16,7 @@ export function SupperSection() {
     <section className="supper-section" id="supperclub">
       <Container>
         <Reveal className="supper-head">
-          <span className="label">Tarweeda Presents</span>
+          <span className="eyebrow" style={{ color: 'var(--g5)', justifyContent: 'center' }}>Tarweeda Presents</span>
           <h2>The Supper Club</h2>
           <p>On-demand intimate dining — 20 seats, one long table, one theme, one menu.</p>
           <div className="supper-stats">
@@ -47,12 +47,14 @@ function EventCard({ event: ev }: { event: SupperEvent }) {
   const day = date.getDate().toString();
   const month = date.toLocaleDateString('en-GB', { month: 'short' });
   const year = date.getFullYear().toString();
+  const seatPercent = ev.total_seats > 0 ? ((ev.total_seats - ev.seats_left) / ev.total_seats) * 100 : 0;
 
   return (
     <div className={`event ${ev.is_featured ? 'featured' : ''} ${expanded ? 'expanded' : ''}`}>
       <div className="event-date">
         <div className="event-day">{day}</div>
-        <div className="event-month">{month} {year}</div>
+        <div className="event-month">{month}</div>
+        <div className="event-month" style={{ opacity: 0.4, fontSize: '0.58rem' }}>{year}</div>
       </div>
       <div className="event-body">
         <div className="event-badge">{ev.theme}</div>
@@ -69,16 +71,21 @@ function EventCard({ event: ev }: { event: SupperEvent }) {
       </div>
       <div className="event-right">
         <div>
-          <div className="event-price">from {formatPrice(ev.price_pence)}</div>
           <div className="event-seats">{ev.seats_left > 0 ? `${ev.seats_left} seats left` : 'Sold out'}</div>
+          <div style={{ width: 65, height: 2, background: 'rgba(255,255,255,0.07)', marginTop: '0.45rem' }}>
+            <div style={{ height: '100%', width: `${seatPercent}%`, background: 'var(--g5)' }} />
+          </div>
         </div>
-        <button
-          className={`event-book ${ev.seats_left === 0 ? 'sold' : ''}`}
-          onClick={() => ev.seats_left > 0 && openBooking(ev.id)}
-          disabled={ev.seats_left === 0}
-        >
-          {ev.seats_left > 0 ? 'Reserve' : 'Sold Out'}
-        </button>
+        <div>
+          <div className="event-price">from {formatPrice(ev.price_pence)}</div>
+          <button
+            className={`event-book ${ev.seats_left === 0 ? 'sold' : ''}`}
+            onClick={() => ev.seats_left > 0 && openBooking(ev.id)}
+            disabled={ev.seats_left === 0}
+          >
+            {ev.seats_left > 0 ? 'Reserve' : 'Sold Out'}
+          </button>
+        </div>
       </div>
       {expanded && (
         <div className="event-menu">

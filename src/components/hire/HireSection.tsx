@@ -13,8 +13,8 @@ export function HireSection() {
     <section className="hire-section" id="hire">
       <Container>
         <Reveal className="hire-head">
-          <span className="label">Professional Kitchen Team</span>
-          <h2>Hire Tarweeda Staff</h2>
+          <span className="eyebrow" style={{ color: 'var(--g3)' }}>Professional Kitchen Team</span>
+          <h2 className="sec-title">Hire Tarweeda <em>Staff</em></h2>
           <p>Experienced Palestinian chefs and professional serving staff, available anywhere in London.</p>
         </Reveal>
 
@@ -41,7 +41,7 @@ export function HireSection() {
               <h3>Ready to bring the Tarweeda team?</h3>
               <p>Tell us your date and we'll quote within 48 hours.</p>
             </div>
-            <button className="btn btn-ghost" style={{ borderColor: 'rgba(245,240,232,0.2)', color: 'var(--cream)' }} onClick={openHireModal}>
+            <button className="btn btn-ghost-light" onClick={openHireModal}>
               Enquire About Staffing
             </button>
           </div>

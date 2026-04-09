@@ -1,6 +1,6 @@
-.values-section { padding: 5rem var(--side-pad); background: var(--olive-dark); }
-.values-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 4rem; }
-.value { color: var(--cream); }
-.value h4 { font-family: var(--font-serif); font-weight: 500; font-size: 1.15rem; margin-bottom: 0.6rem; padding-bottom: 0.6rem; border-bottom: 1px solid rgba(245,240,232,0.1); }
-.value p { font-size: 0.82rem; line-height: 1.8; color: rgba(245,240,232,0.45); }
+.values-section { background: var(--g3); padding: 3.5rem 2.5rem; }
+.values-inner { max-width: var(--max-w); margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+.value { color: #fff; padding-top: 1.2rem; border-top: 2px solid rgba(255,255,255,0.2); }
+.value h4 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.45rem; }
+.value p { font-size: 0.82rem; line-height: 1.72; opacity: 0.8; }
 @media (max-width: 768px) { .values-inner { grid-template-columns: 1fr; } }

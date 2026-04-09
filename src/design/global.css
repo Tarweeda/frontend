@@ -19,6 +19,17 @@
   --gold: #c9a84c;
   --terra: #b85c38;
   --white: #fff;
+
+  /* Legacy aliases for admin pages */
+  --olive-dark: var(--g2);
+  --olive: var(--g3);
+  --olive-light: var(--g4);
+  --olive-pale: var(--g6);
+  --kraft: var(--sand);
+  --warm-white: var(--g7);
+  --text: var(--ink);
+  --text2: var(--ink2);
+  --text3: var(--muted);
   --error: #C0392B;
   --success: #27AE60;
   --nav-h: 64px;
