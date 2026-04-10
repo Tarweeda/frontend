@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Modal, ModalHead } from '../ui/Modal';
 import { useUIStore } from '../../store/ui';
 import { api } from '../../lib/api';
+import { useToastStore } from '../../store/toast';
 import './HireModal.css';
 
 const STAFF_OPTIONS = ['Head Chef', 'Sous Chef', 'Serving Staff', 'Full Team'];
@@ -17,7 +18,8 @@ export function HireModal() {
   const toggleStaff = (s: string) => setStaffNeeded((prev) => prev.includes(s) ? prev.filter((x) => x !== s) : [...prev, s]);
 
   const submit = async () => {
-    if (!form.name || !form.email.includes('@')) { alert('Please enter your name and email.'); return; }
+    const showToast = useToastStore.getState().showToast;
+    if (!form.name || !form.email.includes('@')) { showToast('Please enter your name and email.', 'warning'); return; }
     setSubmitting(true);
     try {
       await api.post('/hire/enquiries', {
@@ -27,7 +29,7 @@ export function HireModal() {
         staff_needed: staffNeeded,
       });
       setSuccess(true);
-    } catch { alert('Something went wrong.'); }
+    } catch { useToastStore.getState().showToast('Something went wrong.'); }
     finally { setSubmitting(false); }
   };
 

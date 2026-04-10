@@ -9,4 +9,5 @@ export interface SupperPackage {
   is_featured: boolean;
   is_enquiry: boolean;
   sort_order: number;
+  event_id: string | null;
 }

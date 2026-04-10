@@ -14,13 +14,15 @@ export function useEvents() {
   });
 }
 
-export function usePackages() {
+export function usePackages(eventId?: string | null) {
   return useQuery({
-    queryKey: ['packages'],
+    queryKey: ['packages', eventId],
     queryFn: async () => {
-      const { data } = await api.get<SupperPackage[]>('/packages');
+      const url = eventId ? `/packages?event_id=${eventId}` : '/packages';
+      const { data } = await api.get<SupperPackage[]>(url);
       return data;
     },
+    enabled: !!eventId,
     staleTime: 10 * 60 * 1000,
   });
 }

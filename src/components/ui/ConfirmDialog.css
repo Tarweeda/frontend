@@ -1,0 +1,45 @@
+.confirm-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  background: rgba(11, 21, 8, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: confirm-fade 0.2s ease;
+}
+
+.confirm-box {
+  background: #fff;
+  width: 90%;
+  max-width: 400px;
+  padding: 2rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.confirm-title {
+  font-family: var(--font-serif, Georgia, serif);
+  font-weight: 400;
+  font-size: 1.15rem;
+  color: var(--olive-dark, #2d3a22);
+  margin: 0 0 0.5rem;
+}
+
+.confirm-msg {
+  font-size: 0.85rem;
+  color: var(--text3, #888);
+  margin: 0 0 1.5rem;
+  line-height: 1.5;
+}
+
+.confirm-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+@keyframes confirm-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -4,6 +4,7 @@ import { PaymentForm } from '../cart/PaymentForm';
 import { useUIStore } from '../../store/ui';
 import { useEvents, usePackages } from '../../hooks/useEvents';
 import { api } from '../../lib/api';
+import { useToastStore } from '../../store/toast';
 import type { SupperPackage } from '../../types/package';
 import type { SupperEvent } from '../../types/event';
 import './BookingModal.css';
@@ -15,8 +16,9 @@ const DIETARY_OPTIONS = ['Vegetarian', 'Vegan', 'Gluten-Free', 'Nut-Free', 'Hala
 export function BookingModal() {
   const { bookingEventId, closeBooking, bookingStep, setBookingStep, selectedPackageId, selectPackage, bookingDietary, toggleDietary } = useUIStore();
   const { data: events } = useEvents();
-  const { data: packages } = usePackages();
+  const { data: packages } = usePackages(bookingEventId);
 
+  const showToast = useToastStore((s) => s.showToast);
   const [details, setDetails] = useState({ first_name: '', last_name: '', email: '', phone: '', special_requests: '' });
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [totalPence, setTotalPence] = useState(0);
@@ -41,7 +43,7 @@ export function BookingModal() {
 
   const nextFromDetails = async () => {
     if (!details.first_name || !details.last_name || !details.email.includes('@')) {
-      alert('Please fill in your details.');
+      showToast('Please fill in your details.', 'warning');
       return;
     }
     setSubmitting(true);
@@ -60,7 +62,7 @@ export function BookingModal() {
       }
       setBookingStep(3);
     } catch (err: any) {
-      alert(err.response?.data?.message || 'Booking failed');
+      showToast(err.response?.data?.message || 'Booking failed');
     } finally {
       setSubmitting(false);
     }
@@ -87,7 +89,7 @@ export function BookingModal() {
                 </div>
               ))}
             </div>
-            <button className="bk-next" onClick={() => { if (!selectedPackageId) { alert('Please select a package.'); return; } setBookingStep(1); }}>View Set Menu</button>
+            <button className="bk-next" onClick={() => { if (!selectedPackageId) { showToast('Please select a package.', 'warning'); return; } setBookingStep(1); }}>View Set Menu</button>
           </div>
         )}
 

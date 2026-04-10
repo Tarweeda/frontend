@@ -1,4 +1,5 @@
 import type { Product } from '../../types/product';
+import type { ViewMode } from './ShopSection';
 import { useCartStore } from '../../store/cart';
 import { getProductImageUrl } from '../../lib/supabase';
 import './ProductCard.css';
@@ -7,7 +8,7 @@ function formatPrice(pence: number) {
   return `£${(pence / 100).toFixed(2)}`;
 }
 
-export function ProductCard({ product }: { product: Product }) {
+export function ProductCard({ product, view = 'grid' }: { product: Product; view?: ViewMode }) {
   const addItem = useCartStore((s) => s.addItem);
   const removeItem = useCartStore((s) => s.removeItem);
   const updateQty = useCartStore((s) => s.updateQty);
@@ -17,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
   const imgUrl = getProductImageUrl(product.image_path);
 
   return (
-    <div className="prod-card">
+    <div className={`prod-card ${view}`}>
       <div className="p-illus">
         {imgUrl ? (
           <img src={imgUrl} alt={product.name} />

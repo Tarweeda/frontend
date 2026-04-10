@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { api } from '../../lib/api';
+import { useToastStore } from '../../store/toast';
 import './CateringSection.css';
 
 const DISHES = ['Maqluba', 'Musakhan', 'Maftoul', 'Fatteh Ghazawiyeh', 'Fatteh Hummus', 'Dawali', 'Fatayer (handmade, custom fillings)', 'Mezze, sides, desserts & drinks'];
@@ -13,11 +14,12 @@ export function CateringSection() {
   const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
 
   const submit = async () => {
-    if (!form.name || !form.email) { alert('Please enter your name and email.'); return; }
+    const showToast = useToastStore.getState().showToast;
+    if (!form.name || !form.email) { showToast('Please enter your name and email.', 'warning'); return; }
     try {
       await api.post('/catering/enquiries', { ...form, guest_count: form.guest_count ? parseInt(form.guest_count) : undefined });
       setSent(true);
-    } catch { alert('Something went wrong. Please try again.'); }
+    } catch { showToast('Something went wrong. Please try again.'); }
   };
 
   return (

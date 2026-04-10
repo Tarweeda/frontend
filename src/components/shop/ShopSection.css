@@ -94,9 +94,10 @@
   left: 0.65rem;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 0.75rem;
   color: var(--muted);
   pointer-events: none;
+  display: flex;
+  align-items: center;
 }
 
 .s-inp {
@@ -128,12 +129,55 @@
   font-family: var(--font-sans);
 }
 
-/* Product grid */
+/* View toggles */
+.view-toggles {
+  display: flex;
+  gap: 2px;
+  margin-left: 0.8rem;
+  background: var(--sand2);
+  border-radius: 6px;
+  padding: 2px;
+}
+
+.view-btn {
+  width: 30px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: var(--muted);
+  transition: all 0.2s;
+}
+
+.view-btn.on {
+  background: #fff;
+  color: var(--g3);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.view-btn:hover:not(.on) {
+  color: var(--ink3);
+}
+
+/* Product grid — default (grid view, 5 cols) */
 .prod-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  grid-template-columns: repeat(5, 1fr);
   gap: 1rem;
   margin-bottom: 1rem;
+}
+
+/* Compact view — smaller cards, tighter */
+.prod-grid.view-compact {
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5rem;
+}
+
+/* List view — single column rows */
+.prod-grid.view-list {
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
 }
 
 /* Empty state */
@@ -152,18 +196,42 @@
   opacity: 0.35;
 }
 
+@media (max-width: 1200px) {
+  .prod-grid.view-grid,
+  .prod-grid.view-compact {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .prod-grid.view-grid,
+  .prod-grid.view-compact {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 @media (max-width: 640px) {
-  .prod-grid {
+  .prod-grid.view-grid {
     grid-template-columns: 1fr 1fr;
     gap: 0.6rem;
+  }
+  .prod-grid.view-compact {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.4rem;
   }
   .shop-in {
     padding: 0 1.2rem;
   }
+  .view-toggles {
+    display: none;
+  }
 }
 
 @media (max-width: 380px) {
-  .prod-grid {
+  .prod-grid.view-grid {
     grid-template-columns: 1fr;
+  }
+  .prod-grid.view-compact {
+    grid-template-columns: 1fr 1fr;
   }
 }

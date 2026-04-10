@@ -1,0 +1,54 @@
+/* Admin form styles (inside modals) */
+.admin-form { padding: 1.5rem 2rem 2rem; }
+.admin-form .field { margin-bottom: 1rem; }
+
+.admin-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+@media (max-width: 480px) { .admin-form-row { grid-template-columns: 1fr; } }
+
+.admin-checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.85rem; color: var(--text2); cursor: pointer; margin: 0.5rem 0 1rem; }
+.admin-checkbox input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--olive); cursor: pointer; }
+
+.admin-form-actions { display: flex; gap: 0.8rem; justify-content: flex-end; margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--kraft); }
+
+.admin-form-error { background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.2); color: #C0392B; padding: 0.6rem 1rem; font-size: 0.8rem; margin-top: 0.5rem; }
+
+/* Action buttons in tables */
+.admin-actions { display: flex; gap: 0.4rem; }
+.admin-action-btn { background: none; border: 1px solid var(--kraft); padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; color: var(--text3); transition: all 0.15s; }
+.admin-action-btn:hover { background: var(--cream); color: var(--olive-dark); border-color: var(--olive-pale); }
+.admin-action-btn.danger:hover { background: rgba(192,57,43,0.06); color: #C0392B; border-color: rgba(192,57,43,0.3); }
+
+/* Combo input (category selector) */
+.admin-combo { position: relative; }
+.admin-combo-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--warm-white);
+  border: 1px solid var(--kraft);
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0.3rem 0;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  max-height: 160px;
+  overflow-y: auto;
+}
+.admin-combo-list li {
+  padding: 0.45rem 0.8rem;
+  font-size: 0.82rem;
+  color: var(--text2);
+  cursor: pointer;
+}
+.admin-combo-list li:hover {
+  background: var(--cream);
+  color: var(--olive-dark);
+}
+
+/* Menu editor (events) */
+.admin-menu-section { margin: 1rem 0; }
+.admin-menu-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+.admin-menu-item { display: grid; grid-template-columns: 1fr 1.5fr 1fr auto; gap: 0.5rem; align-items: end; margin-bottom: 0.5rem; }
+.admin-menu-item .field { margin-bottom: 0; }
+@media (max-width: 580px) { .admin-menu-item { grid-template-columns: 1fr 1fr; } }

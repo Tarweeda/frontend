@@ -6,6 +6,8 @@ import { NotFound } from "./pages/NotFound";
 import { CartDrawer } from "./components/cart/CartDrawer";
 import { BookingModal } from "./components/supper-club/BookingModal";
 import { HireModal } from "./components/hire/HireModal";
+import { Toast } from "./components/ui/Toast";
+import { ConfirmDialog } from "./components/ui/ConfirmDialog";
 import { AdminLayout } from "./components/admin/AdminLayout";
 import { AdminGuard } from "./components/admin/AdminGuard";
 import { AdminLogin } from "./pages/admin/AdminLogin";
@@ -17,6 +19,7 @@ import { AdminBookings } from "./pages/admin/AdminBookings";
 import { AdminCatering } from "./pages/admin/AdminCatering";
 import { AdminHire } from "./pages/admin/AdminHire";
 import { AdminHampers } from "./pages/admin/AdminHampers";
+import { AdminPackages } from "./pages/admin/AdminPackages";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -48,6 +51,7 @@ export default function App() {
             <Route path="products" element={<AdminProducts />} />
             <Route path="orders" element={<AdminOrders />} />
             <Route path="events" element={<AdminEvents />} />
+            <Route path="packages" element={<AdminPackages />} />
             <Route path="bookings" element={<AdminBookings />} />
             <Route path="catering" element={<AdminCatering />} />
             <Route path="hire" element={<AdminHire />} />
@@ -60,6 +64,8 @@ export default function App() {
         <CartDrawer />
         <BookingModal />
         <HireModal />
+        <Toast />
+        <ConfirmDialog />
       </BrowserRouter>
     </QueryClientProvider>
   );

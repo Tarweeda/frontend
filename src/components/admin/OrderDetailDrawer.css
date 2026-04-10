@@ -1,0 +1,19 @@
+.order-detail { padding: 0; height: 100%; display: flex; flex-direction: column; overflow-y: auto; }
+.order-detail-head { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 1.5rem 1rem; border-bottom: 1px solid var(--kraft); }
+.order-detail-head h2 { font-family: var(--font-serif); font-weight: 400; font-size: 1.3rem; color: var(--olive-dark); margin: 0; }
+
+.order-detail-section { padding: 1.2rem 1.5rem; border-bottom: 1px solid var(--kraft); }
+.order-detail-section h3 { font-size: 0.65rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--text3); font-weight: 500; margin: 0 0 0.8rem; }
+
+.order-detail-row { display: flex; justify-content: space-between; align-items: flex-start; padding: 0.4rem 0; font-size: 0.85rem; }
+.order-detail-label { color: var(--text3); font-size: 0.8rem; }
+.order-detail-value { color: var(--text); text-align: right; max-width: 60%; }
+
+.order-items-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.order-items-table th { text-align: left; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text3); font-weight: 500; padding: 0.4rem 0; border-bottom: 1px solid var(--kraft); }
+.order-items-table td { padding: 0.5rem 0; color: var(--text2); border-bottom: 1px solid rgba(0,0,0,0.04); }
+.order-items-table th:last-child, .order-items-table td:last-child { text-align: right; }
+
+.order-detail-totals { padding: 1.2rem 1.5rem; }
+.order-detail-totals .order-detail-row { font-size: 0.85rem; color: var(--text2); }
+.order-detail-total { font-weight: 600; color: var(--olive-dark); padding-top: 0.6rem; border-top: 1px solid var(--kraft); margin-top: 0.3rem; }

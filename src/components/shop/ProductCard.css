@@ -211,6 +211,80 @@
   text-align: center;
 }
 
+/* ===== List view ===== */
+.prod-card.list {
+  flex-direction: row;
+  border-radius: 8px;
+}
+
+.prod-card.list .p-illus {
+  width: 120px;
+  height: auto;
+  min-height: 100px;
+  flex-shrink: 0;
+}
+
+.prod-card.list .p-info {
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1rem 1.2rem;
+}
+
+.prod-card.list .p-name {
+  min-width: 160px;
+  margin-bottom: 0;
+}
+
+.prod-card.list .p-desc {
+  flex: 1;
+  margin-bottom: 0;
+}
+
+.prod-card.list .p-action-row {
+  margin-top: 0;
+  flex-shrink: 0;
+}
+
+/* ===== Compact view ===== */
+.prod-card.compact {
+  border-radius: 8px;
+}
+
+.prod-card.compact .p-illus {
+  height: 130px;
+}
+
+.prod-card.compact .p-info {
+  padding: 0.7rem 0.8rem 0.8rem;
+}
+
+.prod-card.compact .p-name {
+  font-size: 0.82rem;
+  margin-bottom: 0.15rem;
+}
+
+.prod-card.compact .p-desc {
+  display: none;
+}
+
+.prod-card.compact .p-price {
+  font-size: 0.9rem;
+}
+
+.prod-card.compact .p-unit {
+  display: none;
+}
+
+.prod-card.compact .p-add-btn {
+  padding: 0.4rem 0.7rem;
+  font-size: 0.65rem;
+}
+
+.prod-card.compact .p-add-btn span {
+  display: none;
+}
+
 /* Mobile */
 @media (max-width: 640px) {
   .p-illus {

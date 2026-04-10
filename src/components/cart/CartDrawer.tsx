@@ -4,6 +4,7 @@ import { useUIStore } from '../../store/ui';
 import { useCartStore } from '../../store/cart';
 import { PaymentForm } from './PaymentForm';
 import { api } from '../../lib/api';
+import { useToastStore } from '../../store/toast';
 import './CartDrawer.css';
 
 function formatPrice(pence: number) { return `£${(pence / 100).toFixed(2)}`; }
@@ -12,6 +13,7 @@ export function CartDrawer() {
   const { cartOpen, closeCart, cartStep, setCartStep } = useUIStore();
   const { items, removeItem, updateQty, subtotal, total, fulfilment, setFulfilment, clearCart } = useCartStore();
 
+  const showToast = useToastStore((s) => s.showToast);
   const [customerInfo, setCustomerInfo] = useState({ name: '', email: '', address: '', notes: '' });
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [totalPence, setTotalPence] = useState(0);
@@ -22,7 +24,7 @@ export function CartDrawer() {
 
   const goToPayment = async () => {
     if (!customerInfo.name || !customerInfo.email.includes('@') || !customerInfo.address) {
-      alert('Please fill in all required fields.');
+      showToast('Please fill in all required fields.', 'warning');
       return;
     }
     setSubmitting(true);
@@ -39,7 +41,7 @@ export function CartDrawer() {
       setTotalPence(data.total_pence);
       setCartStep(2);
     } catch (err: any) {
-      alert(err.response?.data?.message || 'Failed to create order');
+      showToast(err.response?.data?.message || 'Failed to create order');
     } finally {
       setSubmitting(false);
     }

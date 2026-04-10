@@ -1,16 +1,18 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import { AdminIcon } from './AdminIcon';
 import logo from '../../assets/logo.png';
 import './AdminLayout.css';
 
 const NAV_ITEMS = [
-  { path: '/admin', label: 'Dashboard', icon: '📊' },
-  { path: '/admin/products', label: 'Products', icon: '🫙' },
-  { path: '/admin/orders', label: 'Orders', icon: '📦' },
-  { path: '/admin/events', label: 'Events', icon: '🕯' },
-  { path: '/admin/bookings', label: 'Bookings', icon: '🪑' },
-  { path: '/admin/catering', label: 'Catering', icon: '🍽' },
-  { path: '/admin/hire', label: 'Hire', icon: '👨‍🍳' },
-  { path: '/admin/hampers', label: 'Hampers', icon: '🎁' },
+  { path: '/admin', label: 'Dashboard', icon: 'grid' },
+  { path: '/admin/products', label: 'Products', icon: 'package' },
+  { path: '/admin/orders', label: 'Orders', icon: 'shopping-bag' },
+  { path: '/admin/events', label: 'Events', icon: 'calendar' },
+  { path: '/admin/packages', label: 'Packages', icon: 'layers' },
+  { path: '/admin/bookings', label: 'Bookings', icon: 'clipboard' },
+  { path: '/admin/catering', label: 'Catering', icon: 'utensils' },
+  { path: '/admin/hire', label: 'Hire', icon: 'users' },
+  { path: '/admin/hampers', label: 'Hampers', icon: 'gift' },
 ];
 
 export function AdminLayout() {
@@ -36,7 +38,7 @@ export function AdminLayout() {
               to={item.path}
               className={`admin-nav-item ${location.pathname === item.path ? 'active' : ''}`}
             >
-              <span className="admin-nav-icon">{item.icon}</span>
+              <span className="admin-nav-icon"><AdminIcon name={item.icon} size={18} /></span>
               {item.label}
             </Link>
           ))}

@@ -108,13 +108,6 @@ export function Hero() {
         ))}
       </div>
 
-      {/* Scroll indicator */}
-      <div className="hero-scroll">
-        <div className="scroll-line">
-          <div className="scroll-line-inner" />
-        </div>
-        <span>Scroll</span>
-      </div>
     </section>
   );
 }

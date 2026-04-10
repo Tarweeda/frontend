@@ -7,6 +7,7 @@ import { Spinner } from '../ui/Spinner';
 import './ShopSection.css';
 
 type Filter = 'all' | 'staples' | 'pantry';
+export type ViewMode = 'grid' | 'list' | 'compact';
 
 const TABS: { value: Filter; label: string }[] = [
   { value: 'all', label: 'All' },
@@ -18,6 +19,7 @@ export function ShopSection() {
   const [filter, setFilter] = useState<Filter>('all');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('default');
+  const [view, setView] = useState<ViewMode>('grid');
   const { data: products, isLoading } = useProducts(filter === 'all' ? undefined : filter);
 
   const filtered = useMemo(() => {
@@ -62,10 +64,60 @@ export function ShopSection() {
           <div className="shop-filter-row">
             <div className="shop-filter-left">
               <span className="s-count">{filtered.length} products</span>
+              <div className="view-toggles">
+                <button
+                  className={`view-btn ${view === 'grid' ? 'on' : ''}`}
+                  onClick={() => setView('grid')}
+                  aria-label="Grid view"
+                  title="Grid"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="1" y="1" width="5" height="5" rx="1" />
+                    <rect x="8" y="1" width="5" height="5" rx="1" />
+                    <rect x="1" y="8" width="5" height="5" rx="1" />
+                    <rect x="8" y="8" width="5" height="5" rx="1" />
+                  </svg>
+                </button>
+                <button
+                  className={`view-btn ${view === 'compact' ? 'on' : ''}`}
+                  onClick={() => setView('compact')}
+                  aria-label="Compact view"
+                  title="Compact"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <rect x="1" y="1" width="3" height="3" rx="0.5" />
+                    <rect x="5.5" y="1" width="3" height="3" rx="0.5" />
+                    <rect x="10" y="1" width="3" height="3" rx="0.5" />
+                    <rect x="1" y="5.5" width="3" height="3" rx="0.5" />
+                    <rect x="5.5" y="5.5" width="3" height="3" rx="0.5" />
+                    <rect x="10" y="5.5" width="3" height="3" rx="0.5" />
+                    <rect x="1" y="10" width="3" height="3" rx="0.5" />
+                    <rect x="5.5" y="10" width="3" height="3" rx="0.5" />
+                    <rect x="10" y="10" width="3" height="3" rx="0.5" />
+                  </svg>
+                </button>
+                <button
+                  className={`view-btn ${view === 'list' ? 'on' : ''}`}
+                  onClick={() => setView('list')}
+                  aria-label="List view"
+                  title="List"
+                >
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <line x1="1" y1="3" x2="13" y2="3" />
+                    <line x1="1" y1="7" x2="13" y2="7" />
+                    <line x1="1" y1="11" x2="13" y2="11" />
+                  </svg>
+                </button>
+              </div>
             </div>
             <div className="shop-filter-right">
               <div className="s-wrap">
-                <span className="s-icon">🔍</span>
+                <span className="s-icon">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                    <circle cx="11" cy="11" r="8" />
+                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  </svg>
+                </span>
                 <input
                   type="text"
                   className="s-inp"
@@ -98,9 +150,9 @@ export function ShopSection() {
               <p>No products found</p>
             </div>
           ) : (
-            <div className="prod-grid">
+            <div className={`prod-grid view-${view}`}>
               {filtered.map((product) => (
-                <ProductCard key={product.id} product={product} />
+                <ProductCard key={product.id} product={product} view={view} />
               ))}
             </div>
           )}

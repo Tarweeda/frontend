@@ -1,6 +1,7 @@
 import { useScrolledNav } from '../../hooks/useScrolledNav';
 import { useCartStore } from '../../store/cart';
 import { useUIStore } from '../../store/ui';
+import logo from '../../assets/logo.png';
 import './Navbar.css';
 
 const NAV_LINKS = [
@@ -20,6 +21,7 @@ export function Navbar() {
     <>
       <nav className={`nav ${scrolled ? 'light' : 'dark'}`}>
         <a href="#" className="logo-svg-wrap">
+          <img src={logo} alt="Tarweeda" className="logo-img" />
           <span className="logo-text">Tarweeda</span>
         </a>
 

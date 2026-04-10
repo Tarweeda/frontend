@@ -2,20 +2,34 @@ import { Reveal } from '../ui/Reveal';
 import './Pillars.css';
 
 const PILLARS = [
-  { icon: '🌿', title: 'Field Staples', desc: "Olive oil, za'atar, sumac, tahina — the essentials that anchor every Palestinian kitchen." },
-  { icon: '🫙', title: 'Home Preserves', desc: 'Small-batch mouneh — makdous, pickled lemon, qazha — crafted with care.' },
-  { icon: '🍽', title: 'Catering & Gatherings', desc: 'Full table spreads for family gatherings, events, and celebrations.' },
+  {
+    title: 'Field Staples',
+    sub: 'Olive oil · Za\'atar · Sumac · Tahina',
+    href: '#shop',
+  },
+  {
+    title: 'Home Preserves',
+    sub: 'Makdous · Pickled Lemon · Qazha',
+    href: '#shop',
+  },
+  {
+    title: 'Catering',
+    sub: 'Gatherings · Events · Celebrations',
+    href: '#catering',
+  },
 ];
 
 export function Pillars() {
   return (
     <div className="pillars">
-      <Reveal className="pillars-grid">
+      <Reveal className="pillars-strip">
         {PILLARS.map((p) => (
-          <a key={p.title} href="#shop" className="pillar">
-            <div className="pillar-icon">{p.icon}</div>
-            <h3>{p.title}</h3>
-            <p>{p.desc}</p>
+          <a key={p.title} href={p.href} className="pillar-card">
+            <div className="pillar-card-overlay" />
+            <div className="pillar-card-content">
+              <h3>{p.title}</h3>
+              <span className="pillar-card-sub">{p.sub}</span>
+            </div>
           </a>
         ))}
       </Reveal>
