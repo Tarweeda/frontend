@@ -4,6 +4,7 @@ import { api } from '../../lib/api';
 import { Modal, ModalHead } from '../ui/Modal';
 import { Input, Textarea } from '../ui/Input';
 import { Button } from '../ui/Button';
+import { ImageUpload } from './ImageUpload';
 import './AdminForms.css';
 
 interface Product {
@@ -116,10 +117,8 @@ export function ProductFormModal({ open, onClose, product }: Props) {
           <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} required />
           <Input label="Unit" value={form.unit} onChange={(e) => set('unit', e.target.value)} required placeholder="e.g. 500ml" />
         </div>
-        <div className="admin-form-row">
-          <Input label="Sort Order" type="number" value={form.sort_order} onChange={(e) => set('sort_order', parseInt(e.target.value || '0'))} />
-          <Input label="Image Path" value={form.image_path || ''} onChange={(e) => set('image_path', e.target.value)} placeholder="/images/product.jpg" />
-        </div>
+        <Input label="Sort Order" type="number" value={form.sort_order} onChange={(e) => set('sort_order', parseInt(e.target.value || '0'))} />
+        <ImageUpload label="Image" value={form.image_path || ''} onChange={(url) => set('image_path', url)} />
         <label className="admin-checkbox">
           <input type="checkbox" checked={form.in_stock} onChange={(e) => set('in_stock', e.target.checked)} />
           In Stock

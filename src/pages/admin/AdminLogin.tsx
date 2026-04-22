@@ -17,6 +17,7 @@ export function AdminLogin() {
     try {
       const { data } = await api.post('/admin/login', { email, password });
       localStorage.setItem('admin_token', data.token);
+      localStorage.setItem('admin_refresh_token', data.refresh_token);
       navigate('/admin');
     } catch (err: any) {
       setError(err.response?.data?.message || 'Login failed');
