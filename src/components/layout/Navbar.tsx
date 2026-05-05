@@ -22,7 +22,6 @@ export function Navbar() {
       <nav className={`nav ${scrolled ? 'light' : 'dark'}`}>
         <a href="#" className="logo-svg-wrap">
           <img src={logo} alt="Tarweeda" className="logo-img" />
-          <span className="logo-text">Tarweeda</span>
         </a>
 
         <ul className="nav-links">
