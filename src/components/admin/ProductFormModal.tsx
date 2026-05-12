@@ -65,9 +65,11 @@ export function ProductFormModal({ open, onClose, product }: Props) {
     mutationFn: async (data: Product) => {
       if (isEdit) {
         const { id, ...body } = data;
-        await api.patch(`/admin/products/${id}`, body);
+        const { created_at, updated_at, ...cleanBody } = body as any;
+        await api.patch(`/admin/products/${id}`, cleanBody);
       } else {
-        await api.post('/admin/products', data);
+        const { created_at, updated_at, ...cleanData } = data as any;
+        await api.post('/admin/products', cleanData);
       }
     },
     onSuccess: () => {
