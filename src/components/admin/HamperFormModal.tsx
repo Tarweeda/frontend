@@ -46,9 +46,11 @@ export function HamperFormModal({ open, onClose, hamper }: Props) {
     mutationFn: async (data: Hamper) => {
       if (isEdit) {
         const { id, ...body } = data;
-        await api.patch(`/admin/hampers/${id}`, body);
+        const { created_at, updated_at, ...cleanBody } = body as any;
+        await api.patch(`/admin/hampers/${id}`, cleanBody);
       } else {
-        await api.post('/admin/hampers', data);
+        const { created_at, updated_at, ...cleanData } = data as any;
+        await api.post('/admin/hampers', cleanData);
       }
     },
     onSuccess: () => {

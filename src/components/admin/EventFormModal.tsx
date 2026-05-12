@@ -58,9 +58,11 @@ export function EventFormModal({ open, onClose, event }: Props) {
     mutationFn: async (data: SupperEvent) => {
       if (isEdit) {
         const { id, ...body } = data;
-        await api.patch(`/admin/events/${id}`, body);
+        const { created_at, updated_at, ...cleanBody } = body as any;
+        await api.patch(`/admin/events/${id}`, cleanBody);
       } else {
-        await api.post('/admin/events', data);
+        const { created_at, updated_at, ...cleanData } = data as any;
+        await api.post('/admin/events', cleanData);
       }
     },
     onSuccess: () => {

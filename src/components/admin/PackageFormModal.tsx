@@ -54,9 +54,11 @@ export function PackageFormModal({ open, onClose, pkg, defaultEventId, events }:
     mutationFn: async (data: Package) => {
       if (isEdit) {
         const { id, ...body } = data;
-        await api.patch(`/admin/packages/${id}`, body);
+        const { created_at, updated_at, ...cleanBody } = body as any;
+        await api.patch(`/admin/packages/${id}`, cleanBody);
       } else {
-        await api.post('/admin/packages', data);
+        const { created_at, updated_at, ...cleanData } = data as any;
+        await api.post('/admin/packages', cleanData);
       }
     },
     onSuccess: () => {
