@@ -1,6 +1,7 @@
 import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { useHampers } from '../../hooks/useHampers';
+import { useSection } from '../../hooks/useSiteContent';
 import { getImageUrl } from '../../lib/supabase';
 import { Spinner } from '../ui/Spinner';
 import './HampersSection.css';
@@ -9,14 +10,16 @@ function formatPrice(pence: number) { return `£${(pence / 100).toFixed(0)}`; }
 
 export function HampersSection() {
   const { data: hampers, isLoading } = useHampers();
+  const content = useSection('hampers');
+  const contact = useSection('contact');
 
   return (
     <section className="hampers-section" id="hampers">
       <Container>
         <Reveal className="hampers-head">
-          <span className="label">Curated Gifts</span>
-          <h2>Gift Hampers</h2>
-          <p>Beautifully wrapped collections — perfect for Eid, birthdays, or simply sending warmth.</p>
+          <span className="label">{content.label}</span>
+          <h2>{content.heading}</h2>
+          <p>{content.body}</p>
         </Reveal>
 
         <Reveal>
@@ -39,7 +42,7 @@ export function HampersSection() {
                     <div className="hamper-price">{formatPrice(h.price_pence)}</div>
                     <button
                       className="hamper-btn"
-                      onClick={() => window.location.href = `mailto:hello@tarweeda.com?subject=Gift%20Hamper%20—%20${encodeURIComponent(h.name)}`}
+                      onClick={() => window.location.href = `mailto:${contact.email}?subject=Gift%20Hamper%20—%20${encodeURIComponent(h.name)}`}
                     >
                       Order Hamper
                     </button>

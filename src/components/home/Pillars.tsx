@@ -1,30 +1,15 @@
 import { Reveal } from '../ui/Reveal';
+import { useSection } from '../../hooks/useSiteContent';
 import './Pillars.css';
 
-const PILLARS = [
-  {
-    title: 'Field Staples',
-    sub: 'Olive oil · Za\'atar · Sumac · Tahina',
-    href: '#shop',
-  },
-  {
-    title: 'Home Preserves',
-    sub: 'Makdous · Pickled Lemon · Qazha',
-    href: '#shop',
-  },
-  {
-    title: 'Catering',
-    sub: 'Gatherings · Events · Celebrations',
-    href: '#catering',
-  },
-];
-
 export function Pillars() {
+  const { items } = useSection('pillars');
+
   return (
     <div className="pillars">
       <Reveal className="pillars-strip">
-        {PILLARS.map((p) => (
-          <a key={p.title} href={p.href} className="pillar-card">
+        {items.map((p, i) => (
+          <a key={i} href={p.href} className="pillar-card">
             <div className="pillar-card-overlay" />
             <div className="pillar-card-content">
               <h3>{p.title}</h3>

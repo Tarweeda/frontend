@@ -13,6 +13,7 @@ const NAV_ITEMS = [
   { path: '/admin/catering', label: 'Catering', icon: 'utensils' },
   { path: '/admin/hire', label: 'Hire', icon: 'users' },
   { path: '/admin/hampers', label: 'Hampers', icon: 'gift' },
+  { path: '/admin/site-content', label: 'Site Content', icon: 'file-text' },
 ];
 
 export function AdminLayout() {

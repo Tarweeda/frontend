@@ -1,6 +1,7 @@
 import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { useHireRoles } from '../../hooks/useHampers';
+import { useSection } from '../../hooks/useSiteContent';
 import { useUIStore } from '../../store/ui';
 import { Spinner } from '../ui/Spinner';
 import './HireSection.css';
@@ -8,14 +9,15 @@ import './HireSection.css';
 export function HireSection() {
   const { data: roles, isLoading } = useHireRoles();
   const openHireModal = useUIStore((s) => s.openHireModal);
+  const h = useSection('hire');
 
   return (
     <section className="hire-section" id="hire">
       <Container>
         <Reveal className="hire-head">
-          <span className="eyebrow" style={{ color: 'var(--g3)' }}>Professional Kitchen Team</span>
-          <h2 className="sec-title">Hire Tarweeda <em>Staff</em></h2>
-          <p>Experienced Palestinian chefs and professional serving staff, available anywhere in London.</p>
+          <span className="eyebrow" style={{ color: 'var(--g3)' }}>{h.eyebrow}</span>
+          <h2 className="sec-title">{h.headingPre}<em>{h.headingEm}</em></h2>
+          <p>{h.description}</p>
         </Reveal>
 
         <Reveal>
@@ -38,11 +40,11 @@ export function HireSection() {
         <Reveal>
           <div className="hire-cta-bar">
             <div>
-              <h3>Ready to bring the Tarweeda team?</h3>
-              <p>Tell us your date and we'll quote within 48 hours.</p>
+              <h3>{h.ctaHeading}</h3>
+              <p>{h.ctaSub}</p>
             </div>
             <button className="btn btn-ghost-light" onClick={openHireModal}>
-              Enquire About Staffing
+              {h.ctaButton}
             </button>
           </div>
         </Reveal>

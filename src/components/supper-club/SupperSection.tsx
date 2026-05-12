@@ -1,6 +1,7 @@
 import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { useEvents } from '../../hooks/useEvents';
+import { useSection } from '../../hooks/useSiteContent';
 import { useUIStore } from '../../store/ui';
 import { Spinner } from '../ui/Spinner';
 import { useState } from 'react';
@@ -11,18 +12,19 @@ function formatPrice(pence: number) { return `£${(pence / 100).toFixed(0)}`; }
 
 export function SupperSection() {
   const { data: events, isLoading } = useEvents();
+  const s = useSection('supper');
 
   return (
     <section className="supper-section" id="supperclub">
       <Container>
         <Reveal className="supper-head">
-          <span className="eyebrow" style={{ color: 'var(--g5)', justifyContent: 'center' }}>Tarweeda Presents</span>
-          <h2>The Supper Club</h2>
-          <p>On-demand intimate dining — 20 seats, one long table, one theme, one menu.</p>
+          <span className="eyebrow" style={{ color: 'var(--g5)', justifyContent: 'center' }}>{s.eyebrow}</span>
+          <h2>{s.heading}</h2>
+          <p>{s.description}</p>
           <div className="supper-stats">
-            <div className="supper-stat"><div className="supper-stat-n">20</div><div className="supper-stat-l">Seats</div></div>
-            <div className="supper-stat"><div className="supper-stat-n">5+</div><div className="supper-stat-l">Courses</div></div>
-            <div className="supper-stat"><div className="supper-stat-n">£60</div><div className="supper-stat-l">From</div></div>
+            {s.stats.map((stat, i) => (
+              <div className="supper-stat" key={i}><div className="supper-stat-n">{stat.value}</div><div className="supper-stat-l">{stat.label}</div></div>
+            ))}
           </div>
         </Reveal>
 

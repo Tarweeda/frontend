@@ -38,6 +38,10 @@ const ICONS: Record<string, string[]> = {
     'M12 7H7.5a2.5 2.5 0 110-5C11 2 12 7 12 7z',
     'M12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z',
   ],
+  'file-text': [
+    'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z',
+    'M14 2v6h6', 'M16 13H8', 'M16 17H8', 'M10 9H8',
+  ],
 };
 
 interface Props {

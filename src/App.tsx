@@ -20,6 +20,7 @@ import { AdminCatering } from "./pages/admin/AdminCatering";
 import { AdminHire } from "./pages/admin/AdminHire";
 import { AdminHampers } from "./pages/admin/AdminHampers";
 import { AdminPackages } from "./pages/admin/AdminPackages";
+import { AdminSiteContent } from "./pages/admin/AdminSiteContent";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -56,6 +57,7 @@ export default function App() {
             <Route path="catering" element={<AdminCatering />} />
             <Route path="hire" element={<AdminHire />} />
             <Route path="hampers" element={<AdminHampers />} />
+            <Route path="site-content" element={<AdminSiteContent />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

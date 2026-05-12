@@ -1,32 +1,26 @@
 import { useScrolledNav } from '../../hooks/useScrolledNav';
 import { useCartStore } from '../../store/cart';
 import { useUIStore } from '../../store/ui';
+import { useSection } from '../../hooks/useSiteContent';
 import logo from '../../assets/logo.png';
 import './Navbar.css';
-
-const NAV_LINKS = [
-  { href: '#shop', label: 'Shop' },
-  { href: '#catering', label: 'Catering' },
-  { href: '#supperclub', label: 'Supper Club' },
-  { href: '#hire', label: 'Hire Staff' },
-  { href: '#hampers', label: 'Hampers' },
-];
 
 export function Navbar() {
   const scrolled = useScrolledNav();
   const itemCount = useCartStore((s) => s.itemCount());
   const { openCart, toggleMobileMenu, mobileMenuOpen } = useUIStore();
+  const nav = useSection('nav');
 
   return (
     <>
       <nav className={`nav ${scrolled ? 'light' : 'dark'}`}>
         <a href="#" className="logo-svg-wrap">
-          <img src={logo} alt="Tarweeda" className="logo-img" />
+          <img src={nav.logo || logo} alt="Tarweeda" className="logo-img" />
         </a>
 
         <ul className="nav-links">
-          {NAV_LINKS.map((link) => (
-            <li key={link.href}>
+          {nav.links.map((link, i) => (
+            <li key={i}>
               <a href={link.href}>{link.label}</a>
             </li>
           ))}
@@ -59,15 +53,16 @@ export function Navbar() {
 
 function MobileMenu() {
   const { mobileMenuOpen, closeMobileMenu } = useUIStore();
+  const nav = useSection('nav');
 
   return (
     <div className={`mob-menu ${mobileMenuOpen ? 'open' : ''}`}>
-      {NAV_LINKS.map((link) => (
-        <a key={link.href} href={link.href} onClick={closeMobileMenu}>
+      {nav.links.map((link, i) => (
+        <a key={i} href={link.href} onClick={closeMobileMenu}>
           {link.label}
         </a>
       ))}
-      <a href="#contact" onClick={closeMobileMenu}>Contact</a>
+      <a href="#contact" onClick={closeMobileMenu}>{nav.contactLabel}</a>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react';
 import { Reveal } from '../ui/Reveal';
 import { useProducts } from '../../hooks/useProducts';
+import { useSection } from '../../hooks/useSiteContent';
 import { ProductCard } from './ProductCard';
 import { StickyBasketBar } from './StickyBasketBar';
 import { Spinner } from '../ui/Spinner';
@@ -9,13 +10,13 @@ import './ShopSection.css';
 type Filter = 'all' | 'staples' | 'pantry';
 export type ViewMode = 'grid' | 'list' | 'compact';
 
-const TABS: { value: Filter; label: string }[] = [
-  { value: 'all', label: 'All' },
-  { value: 'staples', label: 'Field Staples' },
-  { value: 'pantry', label: 'Home Preserves' },
-];
-
 export function ShopSection() {
+  const shop = useSection('shop');
+  const TABS: { value: Filter; label: string }[] = [
+    { value: 'all', label: shop.tabLabels.all },
+    { value: 'staples', label: shop.tabLabels.staples },
+    { value: 'pantry', label: shop.tabLabels.pantry },
+  ];
   const [filter, setFilter] = useState<Filter>('all');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('default');
@@ -44,8 +45,8 @@ export function ShopSection() {
         <Reveal className="shop-header">
           <div className="shop-header-top">
             <div>
-              <span className="eyebrow" style={{ color: 'var(--g3)' }}>The Collection</span>
-              <h2 className="sec-title">Shop <em>Tarweeda</em></h2>
+              <span className="eyebrow" style={{ color: 'var(--g3)' }}>{shop.eyebrow}</span>
+              <h2 className="sec-title">{shop.headingPre}<em>{shop.headingEm}</em></h2>
             </div>
           </div>
 

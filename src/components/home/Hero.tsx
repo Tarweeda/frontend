@@ -1,48 +1,10 @@
 import { useHeroSlider } from '../../hooks/useHeroSlider';
+import { useSection } from '../../hooks/useSiteContent';
 import './Hero.css';
 
-interface HeroSlide {
-  tag: string;
-  heading: string;
-  headingEm: string;
-  subtitle: string;
-  cta1: { label: string; href: string };
-  cta2: { label: string; href: string };
-  watermark: string;
-}
-
-const SLIDES: HeroSlide[] = [
-  {
-    tag: 'Palestinian Pantry',
-    heading: 'From the Fields',
-    headingEm: 'of Palestine',
-    subtitle: 'Authentic ingredients, seasonally sourced. Handcrafted with care, delivered across London.',
-    cta1: { label: 'Shop the Pantry', href: '#shop' },
-    cta2: { label: 'Supper Club', href: '#supperclub' },
-    watermark: 'تزويدة',
-  },
-  {
-    tag: 'Supper Club',
-    heading: 'A Table',
-    headingEm: 'Worth Gathering For',
-    subtitle: 'Intimate Palestinian dining experiences. Five courses, twenty seats, one unforgettable evening.',
-    cta1: { label: 'View Events', href: '#supperclub' },
-    cta2: { label: 'Book a Table', href: '#supperclub' },
-    watermark: 'مائدة',
-  },
-  {
-    tag: 'Catering & Events',
-    heading: 'Bring Palestine',
-    headingEm: 'to Your Table',
-    subtitle: 'Private dining, weddings, corporate events. Bespoke Palestinian menus crafted for your occasion.',
-    cta1: { label: 'Enquire Now', href: '#catering' },
-    cta2: { label: 'Our Menu', href: '#shop' },
-    watermark: 'ضيافة',
-  },
-];
-
 export function Hero() {
-  const { current, next, prev, goTo, pause, resume } = useHeroSlider(SLIDES.length);
+  const { slides } = useSection('hero');
+  const { current, next, prev, goTo, pause, resume } = useHeroSlider(slides.length);
 
   return (
     <section
@@ -55,9 +17,20 @@ export function Hero() {
         className="slides-wrap"
         style={{ transform: `translateX(-${current * 100}%)` }}
       >
-        {SLIDES.map((slide, i) => (
+        {slides.map((slide, i) => (
           <div className="slide" key={i}>
-            <div className="slide-bg" />
+            <div
+              className="slide-bg"
+              style={
+                slide.bgImage
+                  ? {
+                      backgroundImage: `url(${slide.bgImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                    }
+                  : undefined
+              }
+            />
             <div className="slide-grid" />
             <div className="slide-ar">{slide.watermark}</div>
             <div className="slide-content">
@@ -93,12 +66,12 @@ export function Hero() {
 
       {/* Counter */}
       <div className="hero-counter">
-        {String(current + 1).padStart(2, '0')} / {String(SLIDES.length).padStart(2, '0')}
+        {String(current + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
       </div>
 
       {/* Dots */}
       <div className="hero-dots">
-        {SLIDES.map((_, i) => (
+        {slides.map((_, i) => (
           <button
             key={i}
             className={`hero-dot ${i === current ? 'on' : ''}`}

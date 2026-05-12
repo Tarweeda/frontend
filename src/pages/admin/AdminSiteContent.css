@@ -1,0 +1,35 @@
+.sc-panels { display: flex; flex-direction: column; gap: 0.6rem; max-width: 720px; }
+
+.sc-panel { border: 1px solid var(--kraft); border-radius: 4px; background: var(--warm-white); overflow: hidden; }
+
+.sc-panel-head {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.95rem 1.2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  text-align: left;
+  transition: background 0.15s;
+}
+.sc-panel-head:hover { background: var(--cream); }
+.sc-panel-title { font-size: 0.95rem; font-weight: 600; color: var(--olive-dark); }
+.sc-panel-chevron { font-size: 0.8rem; color: var(--text3); transition: transform 0.2s; }
+.sc-panel-chevron.open { transform: rotate(180deg); }
+
+.sc-panel-body { padding: 1.2rem 1.4rem 1.4rem; border-top: 1px solid var(--kraft); }
+
+.sc-panel-actions {
+  display: flex;
+  gap: 0.8rem;
+  justify-content: flex-end;
+  margin-top: 1.4rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--kraft);
+}
+
+.sc-hint { font-size: 0.74rem; color: var(--text3); margin: 0.2rem 0 0.8rem; line-height: 1.5; }
+.sc-hint em { font-style: italic; opacity: 0.8; }

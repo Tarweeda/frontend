@@ -3,12 +3,12 @@ import { Container } from '../layout/Container';
 import { Reveal } from '../ui/Reveal';
 import { api } from '../../lib/api';
 import { useToastStore } from '../../store/toast';
+import { useSection } from '../../hooks/useSiteContent';
 import './CateringSection.css';
 
-const DISHES = ['Maqluba', 'Musakhan', 'Maftoul', 'Fatteh Ghazawiyeh', 'Fatteh Hummus', 'Dawali', 'Fatayer (handmade, custom fillings)', 'Mezze, sides, desserts & drinks'];
-
 export function CateringSection() {
-  const [form, setForm] = useState({ name: '', email: '', event_type: 'Family gathering', guest_count: '', event_date: '', city: 'London', dietary_notes: '', additional_notes: '' });
+  const c = useSection('catering');
+  const [form, setForm] = useState({ name: '', email: '', event_type: c.eventTypes[0] ?? '', guest_count: '', event_date: '', city: c.cities[0] ?? '', dietary_notes: '', additional_notes: '' });
   const [sent, setSent] = useState(false);
 
   const update = (field: string, value: string) => setForm((f) => ({ ...f, [field]: value }));
@@ -27,11 +27,11 @@ export function CateringSection() {
       <Container>
         <div className="catering-grid">
           <Reveal className="catering-left">
-            <span className="label" style={{ color: 'var(--g5)', opacity: 0.8 }}>Catering & Gatherings</span>
-            <h2>Tell us about<br />your <em>gathering</em></h2>
-            <p className="catering-body">Full catering for gatherings of 10 to 200+. We bring the feast to you — communal, generous, and deeply Palestinian.</p>
-            <ul className="catering-dishes">{DISHES.map((d) => <li key={d}>{d}</li>)}</ul>
-            <p className="catering-body" style={{ fontSize: '0.78rem', opacity: 0.45 }}>From £28 per person. We'll confirm your quote within 24 hours.</p>
+            <span className="label" style={{ color: 'var(--g5)', opacity: 0.8 }}>{c.label}</span>
+            <h2>{c.headingPre}<br />{c.headingPost}<em>{c.headingEm}</em></h2>
+            <p className="catering-body">{c.body}</p>
+            <ul className="catering-dishes">{c.dishes.map((d, i) => <li key={i}>{d}</li>)}</ul>
+            <p className="catering-body" style={{ fontSize: '0.78rem', opacity: 0.45 }}>{c.pricingNote}</p>
           </Reveal>
 
           <Reveal className="catering-form">
@@ -49,12 +49,12 @@ export function CateringSection() {
                   <div className="c-field"><label className="c-label">Email</label><input className="c-input" type="email" value={form.email} onChange={(e) => update('email', e.target.value)} placeholder="your@email.com" /></div>
                 </div>
                 <div className="c-row">
-                  <div className="c-field"><label className="c-label">Event type</label><select className="c-input" value={form.event_type} onChange={(e) => update('event_type', e.target.value)}><option>Family gathering</option><option>Corporate event</option><option>Wedding</option><option>Community event</option><option>Other</option></select></div>
+                  <div className="c-field"><label className="c-label">Event type</label><select className="c-input" value={form.event_type} onChange={(e) => update('event_type', e.target.value)}>{c.eventTypes.map((t) => <option key={t}>{t}</option>)}</select></div>
                   <div className="c-field"><label className="c-label">Guests</label><input className="c-input" type="number" value={form.guest_count} onChange={(e) => update('guest_count', e.target.value)} placeholder="e.g. 50" /></div>
                 </div>
                 <div className="c-row">
                   <div className="c-field"><label className="c-label">Date</label><input className="c-input" type="date" value={form.event_date} onChange={(e) => update('event_date', e.target.value)} /></div>
-                  <div className="c-field"><label className="c-label">City</label><select className="c-input" value={form.city} onChange={(e) => update('city', e.target.value)}><option>London</option><option>Rabat</option></select></div>
+                  <div className="c-field"><label className="c-label">City</label><select className="c-input" value={form.city} onChange={(e) => update('city', e.target.value)}>{c.cities.map((ct) => <option key={ct}>{ct}</option>)}</select></div>
                 </div>
                 <div className="c-field"><label className="c-label">Dietary needs</label><input className="c-input" value={form.dietary_notes} onChange={(e) => update('dietary_notes', e.target.value)} placeholder="Vegetarian, vegan, allergies…" /></div>
                 <div className="c-field"><label className="c-label">Tell us more</label><textarea className="c-input" rows={3} value={form.additional_notes} onChange={(e) => update('additional_notes', e.target.value)} placeholder="Budget, preferences…" style={{ resize: 'vertical', minHeight: 70 }} /></div>

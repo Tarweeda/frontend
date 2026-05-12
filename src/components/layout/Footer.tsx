@@ -1,15 +1,17 @@
+import { useSection } from '../../hooks/useSiteContent';
 import './Footer.css';
 
 export function Footer() {
+  const f = useSection('footer');
+
   return (
     <footer className="footer">
-      <span className="f-brand">Tarweeda</span>
-      <p className="f-tag">From the fields of Palestine — handcrafted with affection.</p>
+      <span className="f-brand">{f.brand}</span>
+      <p className="f-tag">{f.tagline}</p>
       <ul className="f-links">
-        <li><a href="#shop">Shop</a></li>
-        <li><a href="#catering">Catering</a></li>
-        <li><a href="#supperclub">Supper Club</a></li>
-        <li><a href="#hampers">Hampers</a></li>
+        {f.links.map((link, i) => (
+          <li key={i}><a href={link.href}>{link.label}</a></li>
+        ))}
       </ul>
     </footer>
   );

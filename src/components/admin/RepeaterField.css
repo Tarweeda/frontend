@@ -1,0 +1,37 @@
+.repeater { margin-bottom: 1.2rem; }
+.repeater-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.8rem;
+  border: 1px solid var(--kraft);
+  border-radius: 4px;
+  margin-bottom: 0.6rem;
+  background: var(--warm-white);
+}
+.repeater-row-body { flex: 1; min-width: 0; }
+.repeater-row-actions { display: flex; flex-direction: column; gap: 0.3rem; }
+.repeater-btn {
+  background: none;
+  border: 1px solid var(--kraft);
+  width: 26px;
+  height: 26px;
+  font-size: 0.8rem;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all 0.15s;
+}
+.repeater-btn:hover:not(:disabled) { background: var(--cream); color: var(--olive-dark); border-color: var(--olive-pale); }
+.repeater-btn:disabled { opacity: 0.3; cursor: default; }
+.repeater-btn.danger:hover { background: rgba(192,57,43,0.06); color: #C0392B; border-color: rgba(192,57,43,0.3); }
+.repeater-add {
+  background: none;
+  border: 1px dashed var(--kraft);
+  padding: 0.5rem 1rem;
+  font-size: 0.78rem;
+  cursor: pointer;
+  color: var(--text3);
+  transition: all 0.15s;
+}
+.repeater-add:hover { background: var(--cream); color: var(--olive-dark); border-color: var(--olive); }
