@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { Modal, ModalHead } from '../ui/Modal';
@@ -37,15 +37,24 @@ export function PackageFormModal({ open, onClose, pkg, defaultEventId, events }:
   const isEdit = !!pkg?.id;
   const queryClient = useQueryClient();
   const [form, setForm] = useState<Package>(EMPTY);
+  const [errors, setErrors] = useState<Partial<Record<keyof Package, string>>>({});
 
   useEffect(() => {
     if (open) {
-      setForm(pkg?.id
-        ? { ...pkg }
-        : { ...EMPTY, event_id: defaultEventId || '' }
-      );
+      setForm(pkg?.id ? { ...pkg } : { ...EMPTY, event_id: defaultEventId || '' });
+      setErrors({});
     }
   }, [open, pkg, defaultEventId]);
+
+  const validate = useCallback((data: Package) => {
+    const e: Partial<Record<keyof Package, string>> = {};
+    if (!data.event_id) e.event_id = 'Event is required';
+    if (!data.name.trim()) e.name = 'Name is required';
+    if (!data.slug.trim()) e.slug = 'Slug is required';
+    if (!data.icon.trim()) e.icon = 'Icon is required';
+    if (!data.inclusions.trim()) e.inclusions = 'Inclusions is required';
+    return e;
+  }, []);
 
   const set = (field: keyof Package, value: string | number | boolean) =>
     setForm((f) => ({ ...f, [field]: value }));
@@ -69,6 +78,8 @@ export function PackageFormModal({ open, onClose, pkg, defaultEventId, events }:
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs = validate(form);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
     mutation.mutate(form);
   };
 
@@ -77,16 +88,17 @@ export function PackageFormModal({ open, onClose, pkg, defaultEventId, events }:
   return (
     <Modal open={open} onClose={onClose} maxWidth="540px">
       <ModalHead title={isEdit ? 'Edit Package' : 'New Package'} onClose={onClose} />
-      <form className="admin-form" onSubmit={handleSubmit}>
+      <form className="admin-form" onSubmit={handleSubmit} noValidate>
         <Select label="Event" value={form.event_id} onChange={(e) => set('event_id', e.target.value)} options={[{ value: '', label: 'Select an event...' }, ...eventOptions]} required />
-        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} required placeholder="e.g. Individual Seat" />
-        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} required placeholder="e.g. individual-seat" />
+        {errors.event_id && <span className="field-error" style={{ marginTop: '-0.5rem' }}>{errors.event_id}</span>}
+        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} error={errors.name} required placeholder="e.g. Individual Seat" />
+        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} error={errors.slug} required placeholder="e.g. individual-seat" />
         <div className="admin-form-row">
-          <Input label="Icon (emoji)" value={form.icon} onChange={(e) => set('icon', e.target.value)} required placeholder="e.g. 🪑" />
+          <Input label="Icon (emoji)" value={form.icon} onChange={(e) => set('icon', e.target.value)} error={errors.icon} required placeholder="e.g. 🪑" />
           <Input label="Guests" type="number" min={1} value={form.guests} onChange={(e) => set('guests', parseInt(e.target.value || '1'))} required />
         </div>
         <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} required />
-        <Textarea label="Inclusions" value={form.inclusions} onChange={(e) => set('inclusions', e.target.value)} required rows={2} placeholder="e.g. 5-course menu · Welcome drink · Community table" />
+        <Textarea label="Inclusions" value={form.inclusions} onChange={(e) => set('inclusions', e.target.value)} error={errors.inclusions} required rows={2} placeholder="e.g. 5-course menu · Welcome drink · Community table" />
         <Input label="Sort Order" type="number" value={form.sort_order} onChange={(e) => set('sort_order', parseInt(e.target.value || '0'))} />
         <div style={{ display: 'flex', gap: '1.5rem' }}>
           <label className="admin-checkbox">

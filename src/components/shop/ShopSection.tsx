@@ -5,6 +5,7 @@ import { useSection } from '../../hooks/useSiteContent';
 import { ProductCard } from './ProductCard';
 import { StickyBasketBar } from './StickyBasketBar';
 import { Spinner } from '../ui/Spinner';
+import { CustomSelect } from '../ui/CustomSelect';
 import './ShopSection.css';
 
 type Filter = 'all' | 'staples' | 'pantry';
@@ -127,15 +128,16 @@ export function ShopSection() {
                   onChange={(e) => setSearch(e.target.value)}
                 />
               </div>
-              <select
+              <CustomSelect
                 className="s-sort"
                 value={sort}
-                onChange={(e) => setSort(e.target.value)}
-              >
-                <option value="default">Sort by</option>
-                <option value="price-asc">Price: Low → High</option>
-                <option value="price-desc">Price: High → Low</option>
-              </select>
+                onChange={setSort}
+                options={[
+                  { value: 'default', label: 'Sort by' },
+                  { value: 'price-asc', label: 'Price: Low → High' },
+                  { value: 'price-desc', label: 'Price: High → Low' },
+                ]}
+              />
             </div>
           </div>
         </Reveal>

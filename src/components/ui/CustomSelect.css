@@ -1,0 +1,104 @@
+.cs-wrap { position: relative; display: inline-block; }
+
+/* Trigger */
+.cs-trigger {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  cursor: pointer;
+  border: none;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  white-space: nowrap;
+  transition: border-color 0.18s, background 0.18s;
+}
+
+/* Dark variant (shop, forms on dark bg) */
+.cs-dark .cs-trigger {
+  background: var(--g2);
+  color: rgba(200,216,176,0.55);
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 0.55rem 0.85rem;
+}
+.cs-dark .cs-trigger:hover,
+.cs-dark.cs-open .cs-trigger {
+  border-color: rgba(143,173,110,0.35);
+  color: var(--g6);
+}
+
+/* Light variant (admin, white bg) */
+.cs-light .cs-trigger {
+  background: #fff;
+  color: var(--ink);
+  border: 1.5px solid var(--sand2);
+  padding: 0.55rem 0.85rem;
+  border-radius: 3px;
+}
+.cs-light .cs-trigger:hover,
+.cs-light.cs-open .cs-trigger {
+  border-color: var(--g3);
+}
+
+/* Chevron */
+.cs-chevron {
+  width: 10px;
+  height: 6px;
+  flex-shrink: 0;
+  opacity: 0.5;
+  transition: transform 0.18s;
+}
+.cs-open .cs-chevron { transform: rotate(180deg); opacity: 0.8; }
+
+/* Dropdown */
+.cs-dropdown {
+  position: absolute;
+  top: calc(100% + 3px);
+  left: 0;
+  min-width: 100%;
+  z-index: 200;
+  list-style: none;
+  margin: 0;
+  padding: 0.3rem 0;
+}
+
+.cs-dark .cs-dropdown {
+  background: var(--g1);
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.5);
+}
+
+.cs-light .cs-dropdown {
+  background: #fff;
+  border: 1.5px solid var(--sand2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+/* Options */
+.cs-option {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+
+.cs-dark .cs-option { color: rgba(200,216,176,0.55); }
+.cs-dark .cs-option:hover { background: var(--g3); color: var(--g6); }
+.cs-dark .cs-option.cs-selected { color: var(--g5); background: rgba(143,173,110,0.08); }
+
+.cs-light .cs-option { color: var(--ink2); }
+.cs-light .cs-option:hover { background: var(--g7); color: var(--ink); }
+.cs-light .cs-option.cs-selected { color: var(--g3); background: rgba(45,90,27,0.05); }
+
+.cs-tick {
+  font-size: 0.5rem;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.cs-dark .cs-tick { color: var(--g5); }
+.cs-light .cs-tick { color: var(--g3); }

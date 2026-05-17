@@ -18,4 +18,6 @@ export interface SupperEvent {
   is_featured: boolean;
   menu: Course[];
   status: 'upcoming' | 'sold_out' | 'past' | 'cancelled';
+  cover_image_path: string | null;
+  recap: string | null;
 }

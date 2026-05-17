@@ -3,9 +3,10 @@ import './Input.css';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   label?: string;
+  error?: string;
 }
 
-export function Input({ label, id, ...props }: InputProps) {
+export function Input({ label, id, error, ...props }: InputProps) {
   return (
     <div className="field">
       {label && (
@@ -13,7 +14,8 @@ export function Input({ label, id, ...props }: InputProps) {
           {label}
         </label>
       )}
-      <input className="field-input" id={id} {...props} />
+      <input className={`field-input${error ? ' field-invalid' : ''}`} id={id} {...props} />
+      {error && <span className="field-error">{error}</span>}
     </div>
   );
 }
@@ -21,9 +23,10 @@ export function Input({ label, id, ...props }: InputProps) {
 interface TextareaProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string;
+  error?: string;
 }
 
-export function Textarea({ label, id, ...props }: TextareaProps) {
+export function Textarea({ label, id, error, ...props }: TextareaProps) {
   return (
     <div className="field">
       {label && (
@@ -31,7 +34,8 @@ export function Textarea({ label, id, ...props }: TextareaProps) {
           {label}
         </label>
       )}
-      <textarea className="field-input field-textarea" id={id} {...props} />
+      <textarea className={`field-input field-textarea${error ? ' field-invalid' : ''}`} id={id} {...props} />
+      {error && <span className="field-error">{error}</span>}
     </div>
   );
 }

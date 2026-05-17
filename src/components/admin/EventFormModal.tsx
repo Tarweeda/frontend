@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { Modal, ModalHead } from '../ui/Modal';
-import { Input, Select } from '../ui/Input';
+import { Input, Select, Textarea } from '../ui/Input';
+import { DatePicker } from '../ui/DatePicker';
 import { Button } from '../ui/Button';
 import './AdminForms.css';
 
@@ -20,12 +21,15 @@ interface SupperEvent {
   is_featured: boolean;
   menu: { course: string; dish: string; note?: string }[];
   status: string;
+  cover_image_path: string;
+  recap: string;
 }
 
 const EMPTY: SupperEvent = {
   slug: '', name: '', theme: '', event_date: '', event_time: '19:00',
   location: '', total_seats: 20, seats_left: 20, price_pence: 0,
   is_featured: false, menu: [], status: 'upcoming',
+  cover_image_path: '', recap: '',
 };
 
 interface Props {
@@ -38,10 +42,26 @@ export function EventFormModal({ open, onClose, event }: Props) {
   const isEdit = !!event?.id;
   const queryClient = useQueryClient();
   const [form, setForm] = useState<SupperEvent>(EMPTY);
+  const [errors, setErrors] = useState<Partial<Record<keyof SupperEvent, string>>>({});
 
   useEffect(() => {
-    if (open) setForm(event?.id ? { ...event, menu: event.menu || [] } : { ...EMPTY, menu: [] });
+    if (open) {
+      setForm(event?.id ? { ...event, menu: event.menu || [] } : { ...EMPTY, menu: [] });
+      setErrors({});
+    }
   }, [open, event]);
+
+  const validate = useCallback((data: SupperEvent) => {
+    const e: Partial<Record<keyof SupperEvent, string>> = {};
+    if (!data.name.trim()) e.name = 'Name is required';
+    if (!data.slug.trim()) e.slug = 'Slug is required';
+    if (!data.theme.trim()) e.theme = 'Theme is required';
+    if (!data.event_date) e.event_date = 'Date is required';
+    if (!data.event_time) e.event_time = 'Time is required';
+    if (!data.location.trim()) e.location = 'Location is required';
+    if (!data.price_pence) e.price_pence = 'Price is required';
+    return e;
+  }, []);
 
   const set = (field: keyof SupperEvent, value: any) =>
     setForm((f) => ({ ...f, [field]: value }));
@@ -73,27 +93,33 @@ export function EventFormModal({ open, onClose, event }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs = validate(form);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
     mutation.mutate(form);
   };
 
   return (
     <Modal open={open} onClose={onClose} maxWidth="620px">
       <ModalHead title={isEdit ? 'Edit Event' : 'New Event'} onClose={onClose} />
-      <form className="admin-form" onSubmit={handleSubmit}>
-        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} required />
-        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} required placeholder="e.g. spring-supper-2025" />
-        <Input label="Theme" value={form.theme} onChange={(e) => set('theme', e.target.value)} required />
+      <form className="admin-form" onSubmit={handleSubmit} noValidate>
+        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} error={errors.name} required />
+        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} error={errors.slug} required placeholder="e.g. spring-supper-2025" />
+        <Input label="Theme" value={form.theme} onChange={(e) => set('theme', e.target.value)} error={errors.theme} required />
         <div className="admin-form-row">
-          <Input label="Date" type="date" value={form.event_date} onChange={(e) => set('event_date', e.target.value)} required />
-          <Input label="Time" type="time" value={form.event_time} onChange={(e) => set('event_time', e.target.value)} required />
+          <div className="field">
+            <label className="field-label">Date</label>
+            <DatePicker className={`field-input dp-light-popup${errors.event_date ? ' field-invalid' : ''}`} value={form.event_date} onChange={(val) => set('event_date', val)} placeholder="Select a date" />
+            {errors.event_date && <span className="field-error">{errors.event_date}</span>}
+          </div>
+          <Input label="Time" type="time" value={form.event_time} onChange={(e) => set('event_time', e.target.value)} error={errors.event_time} required />
         </div>
-        <Input label="Location" value={form.location} onChange={(e) => set('location', e.target.value)} required />
+        <Input label="Location" value={form.location} onChange={(e) => set('location', e.target.value)} error={errors.location} required />
         <div className="admin-form-row">
           <Input label="Total Seats" type="number" value={form.total_seats} onChange={(e) => set('total_seats', parseInt(e.target.value || '0'))} required />
           <Input label="Seats Left" type="number" value={form.seats_left} onChange={(e) => set('seats_left', parseInt(e.target.value || '0'))} />
         </div>
         <div className="admin-form-row">
-          <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} required />
+          <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} error={errors.price_pence} required />
           <Select label="Status" value={form.status} onChange={(e) => set('status', e.target.value)} options={[
             { value: 'upcoming', label: 'Upcoming' },
             { value: 'sold_out', label: 'Sold Out' },
@@ -105,6 +131,8 @@ export function EventFormModal({ open, onClose, event }: Props) {
           <input type="checkbox" checked={form.is_featured} onChange={(e) => set('is_featured', e.target.checked)} />
           Featured Event
         </label>
+        <Input label="Cover Image URL" value={form.cover_image_path} onChange={(e) => set('cover_image_path', e.target.value)} placeholder="https://…" />
+        <Textarea label="Recap" value={form.recap} onChange={(e) => set('recap', e.target.value)} placeholder="A few lines about the evening…" rows={3} />
 
         {/* Menu items */}
         <div className="admin-menu-section">

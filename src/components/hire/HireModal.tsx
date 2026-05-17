@@ -3,6 +3,7 @@ import { Modal, ModalHead } from '../ui/Modal';
 import { useUIStore } from '../../store/ui';
 import { api } from '../../lib/api';
 import { useToastStore } from '../../store/toast';
+import { DatePicker } from '../ui/DatePicker';
 import './HireModal.css';
 
 const STAFF_OPTIONS = ['Head Chef', 'Sous Chef', 'Serving Staff', 'Full Team'];
@@ -58,7 +59,7 @@ export function HireModal() {
               <div><label className="bk-lbl">Your name</label><input className="bk-inp" value={form.name} onChange={(e) => updateField('name', e.target.value)} placeholder="Full name" /></div>
               <div><label className="bk-lbl">Email</label><input className="bk-inp" type="email" value={form.email} onChange={(e) => updateField('email', e.target.value)} placeholder="your@email.com" /></div>
             </div>
-            <label className="bk-lbl">Event date</label><input className="bk-inp" type="date" value={form.event_date} onChange={(e) => updateField('event_date', e.target.value)} />
+            <label className="bk-lbl">Event date</label><DatePicker className="bk-inp" variant="dark" value={form.event_date} onChange={(val) => updateField('event_date', val)} placeholder="Select a date" />
             <label className="bk-lbl">Location</label><input className="bk-inp" value={form.location} onChange={(e) => updateField('location', e.target.value)} placeholder="Venue / area in London" />
             <label className="bk-lbl">Guests</label><input className="bk-inp" type="number" value={form.guest_count} onChange={(e) => updateField('guest_count', e.target.value)} placeholder="e.g. 50" />
             <label className="bk-lbl">Staff needed</label>

@@ -4,6 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { Spinner } from '../../components/ui/Spinner';
 import { Button } from '../../components/ui/Button';
+import { DatePicker } from '../../components/ui/DatePicker';
 import './AdminPages.css';
 
 type ReportType = 'stock-in' | 'stock-out' | 'snapshot' | 'low-stock';
@@ -113,11 +114,11 @@ export function AdminInventoryReports() {
           <>
             <div className="field">
               <label className="field-label">From</label>
-              <input className="field-input" type="date" value={from} onChange={(e) => setFrom(e.target.value)} />
+              <DatePicker className="field-input dp-light-popup" value={from} onChange={setFrom} placeholder="From date" />
             </div>
             <div className="field">
               <label className="field-label">To</label>
-              <input className="field-input" type="date" value={to} onChange={(e) => setTo(e.target.value)} />
+              <DatePicker className="field-input dp-light-popup" value={to} onChange={setTo} placeholder="To date" />
             </div>
           </>
         )}

@@ -46,6 +46,29 @@
   padding-right: 2.5rem;
 }
 
+/* Inline validation error */
+.field-invalid {
+  border-color: var(--error, #C0392B) !important;
+}
+
+.field-error {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.32rem;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  color: var(--error, #C0392B);
+  line-height: 1.4;
+}
+
+.field-error::before {
+  content: '✕';
+  font-size: 0.55rem;
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
 /* Dark variant (for dark sections) */
 .field--dark .field-label {
   color: rgba(200, 216, 176, 0.35);

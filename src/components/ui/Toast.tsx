@@ -1,6 +1,12 @@
 import { useToastStore } from '../../store/toast';
 import './Toast.css';
 
+const ICONS = {
+  error: '✕',
+  success: '✦',
+  warning: '⚠',
+};
+
 export function Toast() {
   const { toast, clearToast } = useToastStore();
 
@@ -8,8 +14,9 @@ export function Toast() {
 
   return (
     <div className={`toast toast-${toast.type}`}>
+      <span className="toast-icon">{ICONS[toast.type]}</span>
       <span className="toast-msg">{toast.message}</span>
-      <button className="toast-close" onClick={clearToast}>✕</button>
+      <button className="toast-close" onClick={clearToast} aria-label="Dismiss">✕</button>
     </div>
   );
 }

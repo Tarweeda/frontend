@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { Modal, ModalHead } from '../ui/Modal';
@@ -34,10 +34,24 @@ export function HamperFormModal({ open, onClose, hamper }: Props) {
   const isEdit = !!hamper?.id;
   const queryClient = useQueryClient();
   const [form, setForm] = useState<Hamper>(EMPTY);
+  const [errors, setErrors] = useState<Partial<Record<keyof Hamper, string>>>({});
 
   useEffect(() => {
-    if (open) setForm(hamper?.id ? { ...hamper } : { ...EMPTY });
+    if (open) {
+      setForm(hamper?.id ? { ...hamper } : { ...EMPTY });
+      setErrors({});
+    }
   }, [open, hamper]);
+
+  const validate = useCallback((data: Hamper) => {
+    const e: Partial<Record<keyof Hamper, string>> = {};
+    if (!data.name.trim()) e.name = 'Name is required';
+    if (!data.slug.trim()) e.slug = 'Slug is required';
+    if (!data.description.trim()) e.description = 'Description is required';
+    if (!data.contents.trim()) e.contents = 'Contents is required';
+    if (!data.price_pence) e.price_pence = 'Price is required';
+    return e;
+  }, []);
 
   const set = (field: keyof Hamper, value: string | number | boolean) =>
     setForm((f) => ({ ...f, [field]: value }));
@@ -61,19 +75,21 @@ export function HamperFormModal({ open, onClose, hamper }: Props) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const errs = validate(form);
+    if (Object.keys(errs).length) { setErrors(errs); return; }
     mutation.mutate(form);
   };
 
   return (
     <Modal open={open} onClose={onClose} maxWidth="540px">
       <ModalHead title={isEdit ? 'Edit Hamper' : 'New Hamper'} onClose={onClose} />
-      <form className="admin-form" onSubmit={handleSubmit}>
-        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} required />
-        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} required placeholder="e.g. classic-hamper" />
-        <Textarea label="Description" value={form.description} onChange={(e) => set('description', e.target.value)} required rows={3} />
-        <Textarea label="Contents" value={form.contents} onChange={(e) => set('contents', e.target.value)} required rows={3} placeholder="List what's included..." />
+      <form className="admin-form" onSubmit={handleSubmit} noValidate>
+        <Input label="Name" value={form.name} onChange={(e) => set('name', e.target.value)} error={errors.name} required />
+        <Input label="Slug" value={form.slug} onChange={(e) => set('slug', e.target.value)} error={errors.slug} required placeholder="e.g. classic-hamper" />
+        <Textarea label="Description" value={form.description} onChange={(e) => set('description', e.target.value)} error={errors.description} required rows={3} />
+        <Textarea label="Contents" value={form.contents} onChange={(e) => set('contents', e.target.value)} error={errors.contents} required rows={3} placeholder="List what's included..." />
         <div className="admin-form-row">
-          <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} required />
+          <Input label="Price (£)" type="number" step="0.01" value={(form.price_pence / 100).toFixed(2)} onChange={(e) => set('price_pence', Math.round(parseFloat(e.target.value || '0') * 100))} error={errors.price_pence} required />
           <Input label="Sort Order" type="number" value={form.sort_order} onChange={(e) => set('sort_order', parseInt(e.target.value || '0'))} />
         </div>
         <ImageUpload label="Image" value={form.image_path || ''} onChange={(url) => set('image_path', url)} />
