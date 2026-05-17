@@ -6,6 +6,7 @@ import './AdminLayout.css';
 const NAV_ITEMS = [
   { path: '/admin', label: 'Dashboard', icon: 'grid' },
   { path: '/admin/products', label: 'Products', icon: 'package' },
+  { path: '/admin/inventory', label: 'Inventory', icon: 'box' },
   { path: '/admin/orders', label: 'Orders', icon: 'shopping-bag' },
   { path: '/admin/events', label: 'Events', icon: 'calendar' },
   { path: '/admin/packages', label: 'Packages', icon: 'layers' },
@@ -37,7 +38,7 @@ export function AdminLayout() {
             <Link
               key={item.path}
               to={item.path}
-              className={`admin-nav-item ${location.pathname === item.path ? 'active' : ''}`}
+              className={`admin-nav-item ${location.pathname === item.path || (item.path !== '/admin' && location.pathname.startsWith(item.path)) ? 'active' : ''}`}
             >
               <span className="admin-nav-icon"><AdminIcon name={item.icon} size={18} /></span>
               {item.label}

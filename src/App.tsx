@@ -22,6 +22,10 @@ import { AdminHire } from "./pages/admin/AdminHire";
 import { AdminHampers } from "./pages/admin/AdminHampers";
 import { AdminPackages } from "./pages/admin/AdminPackages";
 import { AdminSiteContent } from "./pages/admin/AdminSiteContent";
+import { AdminInventory } from "./pages/admin/AdminInventory";
+import { AdminInventoryProducts } from "./pages/admin/AdminInventoryProducts";
+import { AdminInventoryMovements } from "./pages/admin/AdminInventoryMovements";
+import { AdminInventoryReports } from "./pages/admin/AdminInventoryReports";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -60,6 +64,10 @@ export default function App() {
             <Route path="hire" element={<AdminHire />} />
             <Route path="hampers" element={<AdminHampers />} />
             <Route path="site-content" element={<AdminSiteContent />} />
+            <Route path="inventory" element={<AdminInventory />} />
+            <Route path="inventory/products" element={<AdminInventoryProducts />} />
+            <Route path="inventory/movements" element={<AdminInventoryMovements />} />
+            <Route path="inventory/reports" element={<AdminInventoryReports />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

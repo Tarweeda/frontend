@@ -20,11 +20,16 @@ interface Product {
   image_path: string;
   in_stock: boolean;
   sort_order: number;
+  initial_quantity?: number;
+  low_stock_threshold?: number;
+  sku?: string;
+  cost_price_pence?: number;
 }
 
 const EMPTY: Product = {
   slug: '', category: 'staples', name: '', description: '', tagline: '',
   price_pence: 0, unit: '', tag: '', image_path: '', in_stock: true, sort_order: 0,
+  initial_quantity: 0, low_stock_threshold: 5, sku: '', cost_price_pence: 0,
 };
 
 interface Props {
@@ -121,6 +126,45 @@ export function ProductFormModal({ open, onClose, product }: Props) {
         </div>
         <Input label="Sort Order" type="number" value={form.sort_order} onChange={(e) => set('sort_order', parseInt(e.target.value || '0'))} />
         <ImageUpload label="Image" value={form.image_path || ''} onChange={(url) => set('image_path', url)} />
+
+        <div style={{ borderTop: '1px solid var(--kraft, #e0d8c8)', paddingTop: '1rem', marginTop: '0.5rem' }}>
+          <div style={{ fontSize: '0.68rem', letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text3)', marginBottom: '0.8rem' }}>
+            Stock Settings
+          </div>
+          <div className="admin-form-row">
+            {!isEdit && (
+              <Input
+                label="Initial Stock Quantity"
+                type="number"
+                value={form.initial_quantity ?? 0}
+                onChange={(e) => set('initial_quantity', parseInt(e.target.value || '0'))}
+              />
+            )}
+            <Input
+              label="Low Stock Threshold"
+              type="number"
+              value={form.low_stock_threshold ?? 5}
+              onChange={(e) => set('low_stock_threshold', parseInt(e.target.value || '5'))}
+            />
+          </div>
+          <div className="admin-form-row">
+            <Input
+              label="SKU (optional)"
+              value={form.sku ?? ''}
+              onChange={(e) => set('sku', e.target.value)}
+              placeholder="e.g. TRW-001"
+            />
+            <Input
+              label="Cost Price (£)"
+              type="number"
+              step="0.01"
+              value={form.cost_price_pence ? (form.cost_price_pence / 100).toFixed(2) : ''}
+              onChange={(e) => set('cost_price_pence', Math.round(parseFloat(e.target.value || '0') * 100))}
+              placeholder="0.00"
+            />
+          </div>
+        </div>
+
         <label className="admin-checkbox">
           <input type="checkbox" checked={form.in_stock} onChange={(e) => set('in_stock', e.target.checked)} />
           In Stock
