@@ -1,0 +1,363 @@
+/* ========== Product Detail Page ========== */
+
+.pp-page {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  background: var(--cream);
+  min-height: 60vh;
+}
+
+/* Breadcrumb */
+.pp-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+}
+
+.pp-bc-link {
+  color: var(--g3);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+
+.pp-bc-link:hover {
+  color: var(--g4);
+}
+
+.pp-bc-sep {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.pp-bc-current {
+  color: var(--muted);
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+/* Hero grid */
+.pp-hero {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 3.5rem;
+  align-items: start;
+  margin-bottom: 4rem;
+}
+
+/* Image panel */
+.pp-img-panel {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+  background: var(--g7);
+}
+
+.pp-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s ease;
+}
+
+.pp-img-panel:hover .pp-img {
+  transform: scale(1.03);
+}
+
+.pp-img-placeholder {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--g7) 0%, var(--sand) 100%);
+}
+
+.pp-img-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 65%, rgba(15, 26, 10, 0.15));
+  pointer-events: none;
+}
+
+.pp-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  font-size: 0.6rem;
+}
+
+/* Detail panel */
+.pp-detail {
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pp-category {
+  color: var(--g3);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+}
+
+.pp-name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.1;
+  margin: 0 0 0.9rem;
+}
+
+.pp-tagline {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.08rem;
+  color: var(--ink2);
+  line-height: 1.6;
+  margin: 0 0 1.8rem;
+}
+
+.pp-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.pp-price {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.pp-unit {
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.pp-oos {
+  font-size: 0.8rem;
+  color: var(--terra);
+  font-weight: 600;
+  margin: 0.4rem 0 0;
+  letter-spacing: 0.04em;
+}
+
+.pp-cta-row {
+  margin-top: 1.8rem;
+}
+
+/* Add to Basket button */
+.pp-add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 0.85rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: none;
+}
+
+.pp-add-btn:disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+
+/* Quantity stepper */
+.pp-stepper {
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid var(--g3);
+  border-radius: 10px;
+  overflow: hidden;
+  background: #fff;
+  height: 48px;
+}
+
+.pp-st-btn {
+  width: 48px;
+  height: 48px;
+  border: none;
+  background: transparent;
+  color: var(--g3);
+  font-size: 1.3rem;
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.pp-st-btn:hover {
+  background: var(--g7);
+}
+
+.pp-st-n {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--g3);
+  min-width: 52px;
+  text-align: center;
+  border-left: 1.5px solid var(--sand2);
+  border-right: 1.5px solid var(--sand2);
+}
+
+/* Product story */
+.pp-story {
+  border-top: 1.5px solid var(--sand2);
+  padding: 3.5rem 0;
+  margin-bottom: 3.5rem;
+}
+
+.pp-story-inner {
+  max-width: 680px;
+}
+
+.pp-story-text {
+  font-family: var(--font-serif);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  line-height: 1.85;
+  color: var(--ink2);
+  margin: 1.2rem 0 0;
+  font-weight: 400;
+}
+
+/* Related products */
+.pp-related {
+  border-top: 1.5px solid var(--sand2);
+  padding-top: 3.5rem;
+}
+
+.pp-related-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+/* ========== Loading skeleton ========== */
+.pp-loading {
+  padding-top: 3rem;
+  padding-bottom: 5rem;
+  background: var(--cream);
+}
+
+.pp-skeleton-hero {
+  display: grid;
+  grid-template-columns: 55% 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+.pp-skeleton {
+  background: var(--sand);
+  border-radius: 8px;
+  animation: pp-shimmer 1.6s ease-in-out infinite;
+}
+
+@keyframes pp-shimmer {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.pp-skeleton-img {
+  aspect-ratio: 1 / 1;
+  border-radius: 18px;
+}
+
+.pp-skeleton-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding-top: 0.5rem;
+}
+
+.pp-skeleton-tag  { height: 12px; width: 60px; }
+.pp-skeleton-title { height: 44px; width: 80%; }
+.pp-skeleton-sub  { height: 16px; width: 90%; }
+.pp-skeleton-price { height: 36px; width: 100px; margin-top: 0.4rem; }
+.pp-skeleton-btn  { height: 48px; width: 160px; margin-top: 0.8rem; }
+
+/* Error state */
+.pp-error {
+  padding: 4rem 0;
+  background: var(--cream);
+  text-align: center;
+}
+
+.pp-error p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--ink2);
+  margin-bottom: 1.5rem;
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 1100px) {
+  .pp-related-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .pp-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .pp-img-panel {
+    aspect-ratio: 4 / 3;
+    border-radius: 14px;
+  }
+
+  .pp-skeleton-hero {
+    grid-template-columns: 1fr;
+  }
+
+  .pp-skeleton-img {
+    aspect-ratio: 4 / 3;
+  }
+
+  .pp-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .pp-page {
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+  }
+
+  .pp-name {
+    font-size: 1.7rem;
+  }
+
+  .pp-price {
+    font-size: 1.6rem;
+  }
+
+  .pp-add-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 0.9rem 1.5rem;
+  }
+
+  .pp-related-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}

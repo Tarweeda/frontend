@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { PageLayout } from "./components/layout/PageLayout";
 import { HomePage } from "./pages/HomePage";
+import { ProductPage } from "./pages/ProductPage";
 import { NotFound } from "./pages/NotFound";
 import { CartDrawer } from "./components/cart/CartDrawer";
 import { BookingModal } from "./components/supper-club/BookingModal";
@@ -36,6 +37,7 @@ export default function App() {
           {/* Public site */}
           <Route element={<PageLayout />}>
             <Route path="/" element={<HomePage />} />
+            <Route path="/product/:slug" element={<ProductPage />} />
           </Route>
 
           {/* Admin */}

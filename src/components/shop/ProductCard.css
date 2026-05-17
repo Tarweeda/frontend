@@ -7,6 +7,8 @@
   border: 1.5px solid var(--sand2);
   transition: all 0.22s;
   cursor: pointer;
+  text-decoration: none;
+  color: inherit;
 }
 
 .prod-card:hover {

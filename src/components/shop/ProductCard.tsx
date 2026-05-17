@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import type { Product } from '../../types/product';
 import type { ViewMode } from './ShopSection';
 import { useCartStore } from '../../store/cart';
@@ -18,7 +19,7 @@ export function ProductCard({ product, view = 'grid' }: { product: Product; view
   const imgUrl = getProductImageUrl(product.image_path);
 
   return (
-    <div className={`prod-card ${view}`}>
+    <Link to={`/product/${product.slug}`} className={`prod-card ${view}`}>
       <div className="p-illus">
         {imgUrl ? (
           <img src={imgUrl} alt={product.name} />
@@ -44,7 +45,7 @@ export function ProductCard({ product, view = 'grid' }: { product: Product; view
             {cartQty === 0 ? (
               <button
                 className="p-add-btn"
-                onClick={() => addItem(product)}
+                onClick={(e) => { e.preventDefault(); addItem(product); }}
                 disabled={!product.in_stock}
               >
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -57,7 +58,8 @@ export function ProductCard({ product, view = 'grid' }: { product: Product; view
               <div className="p-stepper on">
                 <button
                   className="st-btn minus"
-                  onClick={() => {
+                  onClick={(e) => {
+                    e.preventDefault();
                     if (cartQty <= 1) removeItem(product.id);
                     else updateQty(product.id, -1);
                   }}
@@ -69,7 +71,7 @@ export function ProductCard({ product, view = 'grid' }: { product: Product; view
                 <div className="st-sep" />
                 <button
                   className="st-btn"
-                  onClick={() => updateQty(product.id, 1)}
+                  onClick={(e) => { e.preventDefault(); updateQty(product.id, 1); }}
                 >
                   +
                 </button>
@@ -78,6 +80,6 @@ export function ProductCard({ product, view = 'grid' }: { product: Product; view
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
