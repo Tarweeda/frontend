@@ -1,15 +1,5 @@
 {
   "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "admin.tarweeda.com" }],
-      "destination": "/admin"
-    },
-    {
-      "source": "/(.*)",
-      "has": [{ "type": "host", "value": "admin.tarweeda.com" }],
-      "destination": "/admin/$1"
-    },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

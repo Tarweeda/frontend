@@ -35,6 +35,14 @@ const queryClient = new QueryClient({
 });
 
 export default function App() {
+  if (
+    window.location.hostname === 'admin.tarweeda.com' &&
+    !window.location.pathname.startsWith('/admin')
+  ) {
+    const newPath = '/admin' + window.location.pathname;
+    window.history.replaceState(null, '', newPath + window.location.search);
+  }
+
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
