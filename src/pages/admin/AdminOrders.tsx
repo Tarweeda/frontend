@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api } from '../../lib/api';
 import { Spinner } from '../../components/ui/Spinner';
@@ -10,6 +10,8 @@ const ORDER_STATUSES = ['received', 'preparing', 'ready', 'delivered', 'collecte
 export function AdminOrders() {
   const queryClient = useQueryClient();
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [search, setSearch] = useState('');
+  const [statusFilter, setStatusFilter] = useState('');
 
   const { data: orders, isLoading } = useQuery({
     queryKey: ['admin-orders'],
@@ -23,6 +25,18 @@ export function AdminOrders() {
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['admin-orders'] }),
   });
 
+  const filtered = useMemo(() => {
+    const q = search.trim().toLowerCase();
+    return (orders ?? []).filter((o: any) => {
+      const matchesSearch = !q
+        || o.order_number?.toLowerCase().includes(q)
+        || o.customer_name?.toLowerCase().includes(q)
+        || o.customer_email?.toLowerCase().includes(q);
+      const matchesStatus = !statusFilter || o.order_status === statusFilter;
+      return matchesSearch && matchesStatus;
+    });
+  }, [orders, search, statusFilter]);
+
   return (
     <div>
       <div className="admin-page-header">
@@ -31,44 +45,64 @@ export function AdminOrders() {
       </div>
 
       {isLoading ? <Spinner /> : !orders?.length ? <p className="admin-empty">No orders yet.</p> : (
-        <div className="admin-table-wrap">
-          <table className="admin-table">
-            <thead>
-              <tr>
-                <th>Order #</th>
-                <th>Customer</th>
-                <th>Total</th>
-                <th>Payment</th>
-                <th>Status</th>
-                <th>Date</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((o: any) => (
-                <tr key={o.id}>
-                  <td className="name-cell">{o.order_number}</td>
-                  <td>{o.customer_name}<br /><span style={{ fontSize: '0.72rem', color: 'var(--text3)' }}>{o.customer_email}</span></td>
-                  <td>&pound;{(o.total_pence / 100).toFixed(2)}</td>
-                  <td><span className={`status-badge ${o.payment_status}`}>{o.payment_status}</span></td>
-                  <td>
-                    <select
-                      className="status-select"
-                      value={o.order_status}
-                      onChange={(e) => updateStatus.mutate({ id: o.id, status: e.target.value })}
-                    >
-                      {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
-                    </select>
-                  </td>
-                  <td style={{ fontSize: '0.75rem' }}>{new Date(o.created_at).toLocaleDateString()}</td>
-                  <td>
-                    <button className="admin-action-btn" onClick={() => setSelectedId(o.id)}>View</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <>
+          <div className="admin-filters">
+            <input
+              className="field-input"
+              type="search"
+              placeholder="Search by order #, name, or email…"
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+            <select className="field-input field-select" value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
+              <option value="">All statuses</option>
+              {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+            </select>
+          </div>
+
+          {!filtered.length ? (
+            <div className="admin-empty">No orders match your filters.</div>
+          ) : (
+            <div className="admin-table-wrap">
+              <table className="admin-table">
+                <thead>
+                  <tr>
+                    <th>Order #</th>
+                    <th>Customer</th>
+                    <th>Total</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.map((o: any) => (
+                    <tr key={o.id}>
+                      <td className="name-cell">{o.order_number}</td>
+                      <td>{o.customer_name}<br /><span style={{ fontSize: '0.72rem', color: 'var(--text3)' }}>{o.customer_email}</span></td>
+                      <td>&pound;{(o.total_pence / 100).toFixed(2)}</td>
+                      <td><span className={`status-badge ${o.payment_status}`}>{o.payment_status}</span></td>
+                      <td>
+                        <select
+                          className="status-select"
+                          value={o.order_status}
+                          onChange={(e) => updateStatus.mutate({ id: o.id, status: e.target.value })}
+                        >
+                          {ORDER_STATUSES.map((s) => <option key={s} value={s}>{s}</option>)}
+                        </select>
+                      </td>
+                      <td style={{ fontSize: '0.75rem' }}>{new Date(o.created_at).toLocaleDateString()}</td>
+                      <td>
+                        <button className="admin-action-btn" onClick={() => setSelectedId(o.id)}>View</button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+        </>
       )}
 
       <OrderDetailDrawer orderId={selectedId} onClose={() => setSelectedId(null)} />

@@ -12,11 +12,7 @@
 
 .admin-form-error { background: rgba(192,57,43,0.08); border: 1px solid rgba(192,57,43,0.2); color: #C0392B; padding: 0.6rem 1rem; font-size: 0.8rem; margin-top: 0.5rem; }
 
-/* Action buttons in tables */
-.admin-actions { display: flex; gap: 0.4rem; }
-.admin-action-btn { background: none; border: 1px solid var(--kraft); padding: 0.3rem 0.6rem; font-size: 0.72rem; cursor: pointer; color: var(--text3); transition: all 0.15s; }
-.admin-action-btn:hover { background: var(--cream); color: var(--olive-dark); border-color: var(--olive-pale); }
-.admin-action-btn.danger:hover { background: rgba(192,57,43,0.06); color: #C0392B; border-color: rgba(192,57,43,0.3); }
+/* Note: .admin-actions / .admin-action-btn now live in AdminPages.css (single source of truth). */
 
 /* Combo input (category selector) */
 .admin-combo { position: relative; }

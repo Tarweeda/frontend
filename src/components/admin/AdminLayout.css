@@ -1,9 +1,38 @@
-.admin-shell { display: flex; min-height: 100vh; }
+.admin-shell {
+  display: flex;
+  min-height: 100vh;
+
+  /* Admin-scoped Shopify/Polaris neutral theme.
+     Redeclaring these custom properties here (not in :root) re-themes every
+     admin page while leaving the public marketing site's :root values intact. */
+  --olive-dark: #202223;
+  --olive: #108043;
+  --olive-light: #108043;
+  --olive-pale: #aee9d1;
+  --kraft: #e1e3e5;
+  --warm-white: #ffffff;
+  --cream: #f6f6f7;
+  --text: #202223;
+  --text2: #42474c;
+  --text3: #6d7175;
+  --gold: #916a00;
+  --font-serif: var(--font-sans);
+
+  /* Admin-only tokens */
+  --admin-radius: 8px;
+  --admin-radius-sm: 6px;
+  --admin-shadow-card: 0 1px 3px rgba(0,0,0,.05);
+  --admin-green-bg: #f1f8f5;
+  --admin-amber-bg: #fff5ea;
+  --admin-red: #d72c0d;
+  --admin-red-bg: #fff0f0;
+  --admin-sidebar-bg: #fbfbfb;
+}
 
 .admin-sidebar {
   width: 240px;
-  background: var(--olive-dark);
-  color: var(--cream);
+  background: var(--admin-sidebar-bg);
+  color: var(--text2);
   display: flex;
   flex-direction: column;
   flex-shrink: 0;
@@ -12,7 +41,7 @@
   bottom: 0;
   left: 0;
   z-index: 100;
-  border-right: 1px solid rgba(255,255,255,0.04);
+  border-right: 1px solid var(--kraft);
 }
 
 .admin-sidebar-logo {
@@ -20,10 +49,10 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
+  border-bottom: 1px solid var(--kraft);
 }
-.admin-sidebar-logo img { height: 28px; filter: brightness(10); opacity: 0.7; }
-.admin-sidebar-logo span { font-family: var(--font-serif); font-size: 0.9rem; color: rgba(245,240,232,0.5); }
+.admin-sidebar-logo img { height: 28px; opacity: 0.9; }
+.admin-sidebar-logo span { font-size: 0.85rem; font-weight: 600; letter-spacing: 0.02em; color: var(--text2); }
 
 .admin-nav { flex: 1; padding: 0.8rem 0; overflow-y: auto; }
 
@@ -31,21 +60,22 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.65rem 1.5rem;
+  padding: 0.6rem 1.5rem;
   font-size: 0.82rem;
-  color: rgba(245,240,232,0.5);
+  color: var(--text2);
   transition: all 0.15s;
   text-decoration: none;
   border-left: 3px solid transparent;
 }
 .admin-nav-item:hover {
-  background: rgba(255,255,255,0.04);
-  color: rgba(245,240,232,0.85);
+  background: #f1f1f1;
+  color: var(--text);
 }
 .admin-nav-item.active {
-  background: rgba(255,255,255,0.07);
-  color: var(--cream);
-  border-left-color: var(--olive-pale);
+  background: var(--admin-green-bg);
+  color: var(--olive);
+  border-left-color: var(--olive);
+  font-weight: 600;
 }
 
 .admin-nav-icon {
@@ -62,9 +92,10 @@
 .admin-logout {
   margin: 0.8rem 1.2rem 1.2rem;
   padding: 0.6rem;
-  border: 1px solid rgba(255,255,255,0.08);
-  background: none;
-  color: rgba(245,240,232,0.4);
+  border: 1px solid var(--kraft);
+  border-radius: var(--admin-radius-sm);
+  background: #fff;
+  color: var(--text3);
   font-size: 0.7rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
@@ -72,8 +103,9 @@
   transition: all 0.15s;
 }
 .admin-logout:hover {
-  border-color: rgba(255,255,255,0.2);
-  color: var(--cream);
+  border-color: #c9cccf;
+  color: var(--text);
+  background: #f6f6f7;
 }
 
 .admin-main {
@@ -91,5 +123,5 @@
   .admin-nav-item.active { border-left: none; }
   .admin-nav-icon { font-size: 0; }
   .admin-main { margin-left: 60px; padding: 1.5rem; }
-  .admin-logout { font-size: 0; padding: 0.5rem; text-align: center; margin: 0.5rem; }
+  .admin-logout { font-size: 0; padding: 0.5rem; text-align: center; margin: 0.5rem; letter-spacing: 0; }
 }

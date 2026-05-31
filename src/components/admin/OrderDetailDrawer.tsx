@@ -66,7 +66,7 @@ export function OrderDetailDrawer({ orderId, onClose }: Props) {
             </div>
 
             <div className="order-detail-section">
-              <h3>Items</h3>
+              <h3>Items{order.order_items?.length ? ` (${order.order_items.length})` : ''}</h3>
               <table className="order-items-table">
                 <thead>
                   <tr><th>Product</th><th>Qty</th><th>Price</th><th>Total</th></tr>
