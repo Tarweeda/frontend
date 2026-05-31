@@ -3,7 +3,7 @@
     {
       "source": "/(.*)",
       "has": [{ "type": "host", "value": "admin.tarweeda.com" }],
-      "destination": "https://tarweeda.com/admin",
+      "destination": "https://www.tarweeda.com/admin",
       "permanent": true
     }
   ],
