@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { IS_PREVIEW } from "./preview/previewMode";
+import { PreviewBridge } from "./preview/PreviewBridge";
 import { PageLayout } from "./components/layout/PageLayout";
 import { HomePage } from "./pages/HomePage";
 import { ProductPage } from "./pages/ProductPage";
@@ -22,7 +24,7 @@ import { AdminCatering } from "./pages/admin/AdminCatering";
 import { AdminHire } from "./pages/admin/AdminHire";
 import { AdminHampers } from "./pages/admin/AdminHampers";
 import { AdminPackages } from "./pages/admin/AdminPackages";
-import { AdminSiteContent } from "./pages/admin/AdminSiteContent";
+import { SiteEditor } from "./pages/admin/SiteEditor/SiteEditor";
 import { AdminInventory } from "./pages/admin/AdminInventory";
 import { AdminInventoryProducts } from "./pages/admin/AdminInventoryProducts";
 import { AdminInventoryMovements } from "./pages/admin/AdminInventoryMovements";
@@ -46,6 +48,7 @@ export default function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
+        {IS_PREVIEW && <PreviewBridge />}
         <Routes>
           {/* Public site */}
           <Route element={<PageLayout />}>
@@ -73,7 +76,7 @@ export default function App() {
             <Route path="catering" element={<AdminCatering />} />
             <Route path="hire" element={<AdminHire />} />
             <Route path="hampers" element={<AdminHampers />} />
-            <Route path="site-content" element={<AdminSiteContent />} />
+            <Route path="site-content" element={<SiteEditor />} />
             <Route path="inventory" element={<AdminInventory />} />
             <Route path="inventory/products" element={<AdminInventoryProducts />} />
             <Route path="inventory/movements" element={<AdminInventoryMovements />} />

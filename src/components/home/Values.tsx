@@ -6,7 +6,7 @@ export function Values() {
   const { items } = useSection('values');
 
   return (
-    <section className="values-section">
+    <section className="values-section" id="values">
       <div className="values-inner">
         {items.map((v, i) => (
           <Reveal key={i} className="value">

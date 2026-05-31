@@ -100,6 +100,12 @@ input, select, textarea {
   background: var(--g4);
 }
 
+/* Preview-mode highlight (only applied inside the Site Editor iframe) */
+[data-preview-section].preview-highlight {
+  outline: 2px solid var(--g4);
+  outline-offset: -2px;
+}
+
 /* Typography utilities */
 .h-display {
   font-family: var(--font-display);
